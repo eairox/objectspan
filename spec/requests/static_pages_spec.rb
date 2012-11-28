@@ -2,49 +2,24 @@ require 'spec_helper'
 
 describe "Static pages" do
 
+  subject { page }
+
   describe "Home page" do
-
-    it "should have the h1 'Object Span'" do
-      visit root_path
-      page.should have_selector('h1', :text => 'Object Span')
-    end
-
-    it "should have the title 'Home'" do
-      visit root_path
-      page.should have_selector('title',
-                        :text => "Object Span")
-    end
-
-  end
+    before { visit root_path } 
+    it {should have_selector('h1', :text => 'Object Span')}
+    it {should have_selector('title', :text => full_title(''))}
+   end
 
   describe "Product" do
-
-     it "should have the h1 'Product'" do
-      visit product_path
-      page.should have_selector('h1', :text => 'Products')
-    end
-
-    it "should have the title 'Products'" do
-      visit product_path
-      page.should have_selector('title',
-                        :text => "Object Span | Products")
-    end
+    before { visit product_path } 
+    it {should have_selector('h1', :text => 'Products')}
+    it {should have_selector('title', :text => full_title('Products'))}
   end
 
   describe "Contact page" do
-
-    it "should have the h1 'Contact'" do
-      visit contact_path
-      page.should have_selector('h1', text: 'Contact')
-    end
-
-    it "should have the title 'Contact'" do
-      visit contact_path
-      page.should have_selector('title',
-                        :text => "Object Span | Contact")
-    end
+    before {visit contact_path}
+    it {should have_selector('h1', :text => 'Contact')}
+    it {should have_selector('title', :text => full_title('Contact'))}
   end
-
-
 
 end
