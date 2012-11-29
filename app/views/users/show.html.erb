@@ -5,7 +5,15 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
+        
       </h1>
+	  <%= @user.email %>
+
     </section>
+    <% if current_user.admin? && !current_user?(@user) %>
+     <%= link_to "edit", edit_user_path(@user) %>
+    | <%= link_to "delete", @user, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+  <% end %>
   </aside>
 </div>
