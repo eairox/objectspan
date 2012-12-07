@@ -1,0 +1,27 @@
+<h1>Listing company_contacts</h1>
+
+<table>
+  <tr>
+    <th>Company</th>
+    <th>Contact type</th>
+    <th>Contact value</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @company_contacts.each do |company_contact| %>
+  <tr>
+    <td><%= company_contact.company_id %></td>
+    <td><%= company_contact.contact_type %></td>
+    <td><%= company_contact.contact_value %></td>
+    <td><%= link_to 'Show', company_contact %></td>
+    <td><%= link_to 'Edit', edit_company_contact_path(company_contact) %></td>
+    <td><%= link_to 'Destroy', company_contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Company contact', new_company_contact_path %>

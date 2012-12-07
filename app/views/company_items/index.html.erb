@@ -1,0 +1,33 @@
+<h1>Listing company_items</h1>
+
+<table>
+  <tr>
+    <th>Company</th>
+    <th>Item</th>
+    <th>Sku</th>
+    <th>Price</th>
+    <th>Url</th>
+    <th>Store return category</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @company_items.each do |company_item| %>
+  <tr>
+    <td><%= company_item.company_id %></td>
+    <td><%= company_item.item_id %></td>
+    <td><%= company_item.sku %></td>
+    <td><%= company_item.price %></td>
+    <td><%= company_item.url %></td>
+    <td><%= company_item.store_return_category_id %></td>
+    <td><%= link_to 'Show', company_item %></td>
+    <td><%= link_to 'Edit', edit_company_item_path(company_item) %></td>
+    <td><%= link_to 'Destroy', company_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Company item', new_company_item_path %>

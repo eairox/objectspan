@@ -1,0 +1,110 @@
+
+<h1><%= image_tag @company.logo.url(:small) %>&nbsp;<%= @company.name %></h1>
+
+<div class="row" >
+
+<div class="span6">
+  <b>Url:</b>
+  <a href="<%= @company.url %>" target="_blank"> <%=  @company.url %></a>
+</div>
+
+<div class="span6">
+  <b>Email:</b>
+  <%= @company.email %>
+</div>
+
+<div class="span6">
+  <b>Phone:</b>
+  <%= @company.phone %>
+</div>
+
+<div class="span6">
+  <b>Fax:</b>
+  <%= @company.fax %>
+</div>
+
+<div class="span6">
+  <b>Address1:</b>
+  <%= @company.address1 %>
+</div>
+
+<div class="span6">
+  <b>Address2:</b>
+  <%= @company.address2 %>
+</div>
+
+<div class="span6">
+  <b>City:</b>
+  <%= @company.city %>
+</div>
+
+<div class="span6">
+  <b>State:</b>
+    <% if !@company.state_id.nil? %>
+        <%= @company.state.name %>
+    <% else %>
+        <%= @company.other_state unless @company.other_state.nil? %>
+    <% end %>
+</div>
+
+<div class="span6">
+  <b>Zipcode:</b>
+  <%= @company.zipcode %>
+</div>
+
+<div class="span6">
+  <b>Country:</b>
+  <%= @company.country_id %>
+</div>
+
+<div class="span12">
+  <b>Description:</b>
+  <%= @company.description %>
+</div>
+
+</div>
+<br>
+
+
+<div class="well">
+<h2> Stores </h2>
+<%= link_to 'Create New Store', new_store_path %>
+<table class="table table-hover">
+  <tr>
+    <th>SN</th>
+    <th>Store Number</th>
+    <th>Name</th>
+    <th> State</th>
+    <th> Country </th>
+    <th>Phone</th>
+    <th>Store Type </th>
+    <th>Purchases</th>
+    <th></th>
+  </tr>
+  <% @company.stores.each_with_index do |s, i| %>
+  <tr>
+    <td><%= i+1 %></td>
+    <td><%= s.store_number %></td>
+    <td><%= link_to s.name, s %></td>
+    <td> 
+      <% if !s.state_id.nil? %>
+          <%= s.state.name %>
+        <% else %>
+          <%= s.other_state unless s.other_state.empty? %>
+      <% end %>
+    </td>
+    <td><%= s.country.name %></td>
+    <td><%= s.phone %></td>
+    <td><%= s.store_type.name %></td>
+    <td><%= s.purchases.count %></td>
+    <td><%= link_to "Edit", edit_store_path(s) %> </td>
+    <td><%= link_to 'Destroy', s, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+    
+  </tr>
+  <% end %>
+</table>
+<%= link_to 'Create New Store', new_store_path %>
+</div>
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>

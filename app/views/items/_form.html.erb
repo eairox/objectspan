@@ -1,0 +1,66 @@
+<%= form_for(@item) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :photo %><br />
+    <%= f.file_field :photo %>
+    <%= image_tag @item.photo.url(:small)%>
+  </div>
+  
+
+  <div class="field">
+    <%= f.label :short_description %><br />
+    <%= f.text_field :short_description %>
+  </div>
+  <div class="field">
+    <%= f.label :upc %><br />
+    <%= f.text_field :upc %>
+  </div>
+  <div class="field">
+    <%= f.label :make_id %><br />
+    <%= f.select( :make_id, Make.all.collect {|m| [m.name, m.id]},  :include_blank => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :model_name %><br />
+    <%= f.text_field :model_name %>
+  </div>
+  <div class="field">
+    <%= f.label :list_price %><br />
+    <%= f.text_field :list_price %>
+  </div>
+  <div class="field">
+    <%= f.label :release_date %><br />
+   <!-- <%= f.date_select :release_date %> -->
+   <% if @item.release_date.nil? %>
+     <%= f.text_field :release_date, :class => "datepicker"  %>
+     <% else %>
+    <%= f.text_field :release_date, :class => "datepicker" ,:value => @item.release_date.strftime("%m/%d/%Y") %> 
+   <% end %>
+    
+  </div>
+  <div class="field">
+    <%= f.label :full_description %><br />
+    <%= f.text_area :full_description %>
+  </div>
+  <div class="field">
+    <%= f.label :features %><br />
+    <%= f.text_area :features %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

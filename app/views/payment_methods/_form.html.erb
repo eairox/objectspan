@@ -1,0 +1,72 @@
+<%= form_for(@payment_method) do |f| %>
+  <% if @payment_method.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@payment_method.errors.count, "error") %> prohibited this payment_method from being saved:</h2>
+
+      <ul>
+      <% @payment_method.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.file_field :photo %>
+  </div>
+  <div class="field">
+    <%= f.label :protection_duration %><br />
+    <%= f.text_field :protection_duration %>
+  </div>
+  <div class="field">
+    <%= f.label :duration_frequency_id %><br />
+    <%= f.number_field :duration_frequency_id %>
+  </div>
+  <div class="field">
+    <%= f.label :protection_limit %><br />
+    <%= f.text_field :protection_limit %>
+  </div>
+  <div class="field">
+    <%= f.label :purchase_protection %><br />
+    <%= f.check_box :purchase_protection %>
+  </div>
+  <div class="field">
+    <%= f.label :stolen %><br />
+    <%= f.check_box :stolen %>
+  </div>
+  <div class="field">
+    <%= f.label :lost %><br />
+    <%= f.check_box :lost %>
+  </div>
+  <div class="field">
+    <%= f.label :water_damaged %><br />
+    <%= f.check_box :water_damaged %>
+  </div>
+  <div class="field">
+    <%= f.label :return_protection %><br />
+    <%= f.check_box :return_protection %>
+  </div>
+  <div class="field">
+    <%= f.label :warranty_protection %><br />
+    <%= f.check_box :warranty_protection %>
+  </div>
+  <div class="field">
+    <%= f.label :warranty_duration %><br />
+    <%= f.text_field :warranty_duration %>
+  </div>
+  <div class="field">
+    <%= f.label :per_item_limit %><br />
+    <%= f.text_field :per_item_limit %>
+  </div>
+  <div class="field">
+    <%= f.label :wordwide %><br />
+    <%= f.check_box :wordwide %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

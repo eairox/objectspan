@@ -1,0 +1,25 @@
+<h1>Listing company_categorizations</h1>
+
+<table>
+  <tr>
+    <th>Company</th>
+    <th>Category</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @company_categorizations.each do |company_categorization| %>
+  <tr>
+    <td><%= company_categorization.company_id %></td>
+    <td><%= company_categorization.category_id %></td>
+    <td><%= link_to 'Show', company_categorization %></td>
+    <td><%= link_to 'Edit', edit_company_categorization_path(company_categorization) %></td>
+    <td><%= link_to 'Destroy', company_categorization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Company categorization', new_company_categorization_path %>

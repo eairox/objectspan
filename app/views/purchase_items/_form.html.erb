@@ -1,0 +1,89 @@
+<%= form_for(@purchase_item) do |f| %>
+  <% if @purchase_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@purchase_item.errors.count, "error") %> prohibited this purchase_item from being saved:</h2>
+
+      <ul>
+      <% @purchase_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :purchase_id %><br />
+     <%= f.select(:purchase_id, Purchase.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :item_id %><br />
+     <%= f.select(:item_id, Item.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %><br />
+    <%= f.text_field :quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :serial_number %><br />
+    <%= f.text_field :serial_number %>
+  </div>
+  <div class="field">
+    <%= f.label :store_id %><br />
+     <%= f.select(:store_id, Store.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :purchase_status_id %><br />
+     <%= f.select(:purchase_status_id, PurchaseStatus.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :tax %><br />
+    <%= f.text_field :tax %>
+  </div>
+  <div class="field">
+    <%= f.label :shipping %><br />
+    <%= f.text_field :shipping %>
+  </div>
+  <div class="field">
+    <%= f.label :total %><br />
+    <%= f.text_field :total %>
+  </div>
+  <div class="field">
+    <%= f.label :purchase_item_status_id %><br />
+     <%= f.select(:purchase_item_status_id, PurchaseItemStatus.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>
+  </div>
+  
+  <h2> Mail-in-Rebate </h2>
+  <div class="field">
+    <%= f.label :mail_in_rebate %><br />
+    <%= f.text_field :mail_in_rebate %>
+  </div>
+  <div class="field">
+    <%= f.label :mail_in_rebate_date %><br />
+    <%= f.date_select :mail_in_rebate_date %>
+  </div>
+  <div class="field">
+    <%= f.label :mail_in_rebate_status_id %><br />
+     <%= f.select(:mail_in_rebate_status_id, MailInRebateStatus.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>
+  </div>
+
+  <h2> Returns</h2>
+  <div class="field">
+    <%= f.label :return_date %><br />
+    <%= f.date_select :return_date %>
+  </div>
+  <div class="field">
+    <%= f.label :return_store_id %><br />
+     <%= f.select(:return_store_id, Store.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :return_tracking %><br />
+    <%= f.text_field :return_tracking %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

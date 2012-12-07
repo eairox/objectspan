@@ -1,0 +1,2 @@
+module MailInRebateStatusesHelper
+end

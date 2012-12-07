@@ -1,0 +1,29 @@
+<h1>Listing company_return_policies</h1>
+
+<table>
+  <tr>
+    <th>Company</th>
+    <th>Return policy</th>
+    <th>Return policy url</th>
+    <th>Return policy faq</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @company_return_policies.each do |company_return_policy| %>
+  <tr>
+    <td><%= company_return_policy.company_id %></td>
+    <td><%= company_return_policy.return_policy %></td>
+    <td><%= company_return_policy.return_policy_url %></td>
+    <td><%= company_return_policy.return_policy_faq %></td>
+    <td><%= link_to 'Show', company_return_policy %></td>
+    <td><%= link_to 'Edit', edit_company_return_policy_path(company_return_policy) %></td>
+    <td><%= link_to 'Destroy', company_return_policy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Company return policy', new_company_return_policy_path %>

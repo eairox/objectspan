@@ -1,5 +1,93 @@
 Objectspan::Application.routes.draw do
   
+  resources :company_categorizations
+
+
+  resources :item_categorizations
+
+
+  resources :categories
+
+
+  resources :purchase_item_feedbacks
+
+
+  resources :purchase_feedbacks
+
+
+  resources :company_contacts
+
+
+  resources :company_countries
+
+
+  resources :company_types
+
+
+  resources :return_duration_types
+
+
+  resources :exchange_duration_types
+
+
+  resources :company_return_policies
+
+
+  resources :company_category_return_policies
+
+
+  resources :company_items
+
+
+  resources :mail_in_rebate_statuses
+
+
+  resources :purchase_item_statuses
+
+
+  resources :payment_methods
+
+
+  resources :purchase_items
+
+
+  resources :duration_frequencies
+
+
+  resources :purchases
+
+
+  resources :return_categories
+
+
+  resources :purchase_statuses
+
+
+  resources :stores
+
+
+  resources :states
+
+
+  resources :countries
+
+
+  resources :companies
+
+
+  resources :groups
+
+
+  resources :visibilities
+
+
+  resources :store_types
+
+
+  resources :items
+
+
+  resources :makes
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 

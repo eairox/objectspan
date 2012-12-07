@@ -1,0 +1,58 @@
+<!-- <p id="notice"><%= notice %></p> -->
+
+<p>
+<%= image_tag @item.photo.url(:small) %>
+  <h1><%= @item.name %></h1>
+</p>
+
+<p>
+  <h2>Short Description:</h2>
+  <%= @item.short_description %>
+</p>
+
+<p>
+  <table>
+    <tr>
+      <td>UPC:</td> <td><%= @item.upc %></td>
+    </tr>
+    <tr>
+    <% if @item.make_id.nil? %>
+        <td>Make:</td> <td></td>
+    <% else %>
+        <td>Make:</td> <td><%= @item.make.name %></td>
+    <% end %>
+
+      
+    </tr>
+    <tr>
+      <td>Model:</td> <td><%= @item.list_price %></td>
+    </tr>
+    <tr>
+      <td>List price:</td> <td><%= @item.list_price %></td>
+    </tr>
+    <tr>
+      <td>Release date:</td> <td><%= @item.release_date.strftime("%m/%d/%Y") unless @item.release_date.nil? %></td>
+    </tr>
+
+  </table>
+
+</p>
+
+<p>
+  <h2>Full Description:</h2>
+  <%= simple_format @item.full_description %>
+</p>
+
+<p>
+  <h2>Features:</h2>
+  <%= simple_format(@item.features) %>
+</p>
+
+<p> 
+<h2>Users Who have this items:</h2>
+
+</p>
+
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

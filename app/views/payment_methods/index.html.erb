@@ -1,0 +1,47 @@
+<h1>Listing payment_methods</h1>
+
+<table class="table">
+  <tr>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>Name</th>
+    <th>Protection duration</th>
+    <th>Protection limit</th>
+    <th>Purchase protection</th>
+    <th>Stolen</th>
+    <th>Lost</th>
+    <th>Water damaged</th>
+    <th>Return protection</th>
+    <th>Warranty protection</th>
+    <th>Warranty duration</th>
+    <th>Per item limit</th>
+    <th>Wordwide</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @payment_methods.each do |payment_method| %>
+  <tr>
+    <td><%= image_tag payment_method.photo.url(:thumb) %></td>
+    <td><%= payment_method.name %></td>
+    <td><%= payment_method.protection_duration %></td>
+    <td><%= payment_method.protection_limit %></td>
+    <td><%= payment_method.purchase_protection %></td>
+    <td><%= payment_method.stolen %></td>
+    <td><%= payment_method.lost %></td>
+    <td><%= payment_method.water_damaged %></td>
+    <td><%= payment_method.return_protection %></td>
+    <td><%= payment_method.warranty_protection %></td>
+    <td><%= payment_method.warranty_duration %></td>
+    <td><%= payment_method.per_item_limit %></td>
+    <td><%= payment_method.wordwide %></td>
+    <td><%= link_to 'Show', payment_method %></td>
+    <td><%= link_to 'Edit', edit_payment_method_path(payment_method) %></td>
+    <td><%= link_to 'Destroy', payment_method, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Payment method', new_payment_method_path %>

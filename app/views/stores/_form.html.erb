@@ -1,0 +1,98 @@
+<%= form_for(@store) do |f| %>
+  <% if @store.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@store.errors.count, "error") %> prohibited this store from being saved:</h2>
+
+      <ul>
+      <% @store.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :company_id %><br />
+     <%= f.select(:company_id, Company.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>
+  </div>
+   <div class="field">
+    <%= f.label :store_type_id %><br />
+     <%= f.select(:store_type_id, StoreType.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :store_number %><br />
+    <%= f.text_field :store_number %>
+  </div>
+  
+  <div class="field">
+    <%= f.file_field :photo %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :address1 %><br />
+    <%= f.text_field :address1 %>
+  </div>
+  <div class="field">
+    <%= f.label :address2 %><br />
+    <%= f.text_field :address2 %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :state_id %><br />
+     <%= f.select(:state_id, State.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :country_id %><br />
+     <%= f.select(:country_id, Country.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :other_state %><br />
+    <%= f.text_field :other_state %>
+  </div>
+  <div class="field">
+    <%= f.label :zipcode %><br />
+    <%= f.text_field :zipcode %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :longitude %><br />
+    <%= f.text_field :longitude %>
+  </div>
+  <div class="field">
+    <%= f.label :latitude %><br />
+    <%= f.text_field :latitude %>
+  </div>
+  <div class="field">
+    <%= f.label :store_url %><br />
+    <%= f.text_field :store_url %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :rating %><br />
+    <%= f.number_field :rating %>
+  </div>
+  <div class="field">
+    <%= f.label :fax %><br />
+    <%= f.text_field :fax %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

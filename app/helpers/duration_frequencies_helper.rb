@@ -1,0 +1,2 @@
+module DurationFrequenciesHelper
+end

@@ -1,0 +1,23 @@
+<h1>Listing return_duration_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @return_duration_types.each do |return_duration_type| %>
+  <tr>
+    <td><%= return_duration_type.name %></td>
+    <td><%= link_to 'Show', return_duration_type %></td>
+    <td><%= link_to 'Edit', edit_return_duration_type_path(return_duration_type) %></td>
+    <td><%= link_to 'Destroy', return_duration_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Return duration type', new_return_duration_type_path %>

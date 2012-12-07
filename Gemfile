@@ -28,6 +28,9 @@ group :assets do
 end
 
 gem 'jquery-rails', '2.0.2'
+gem 'jquery-ui-rails'
+gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git"
+gem 'carmen-rails'
 
 group :test do
   gem 'capybara', '1.1.2'
@@ -37,4 +40,6 @@ end
 
 group :production do
   gem 'pg', '0.12.2'
+  gem 'rack-google_analytics', :require => "rack/google_analytics"
+
 end

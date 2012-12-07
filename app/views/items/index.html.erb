@@ -1,0 +1,42 @@
+<h1>Item List</h1>
+
+<table class="table table-hover">
+  <tr>
+    <th>ID</th>
+    <th></th>
+    <th>Name</th>
+    <th>Short description</th>
+    <th>Upc</th>
+    <th>Make</th>
+    <th>Model name</th>
+    <th>List price</th>
+    <th>Release date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @items.each do |item| %>
+  <tr>
+    <td><%= item.id %></td>
+    <td><%= image_tag item.photo.url(:thumb) %></td>
+    <td><%= link_to item.name, item %></td>
+    <td><%= item.short_description %></td>
+    <td><%= item.upc %></td>
+    <% if item.make_id.nil? %>
+        <td></td>
+    <% else %>
+        <td><%= item.make.name %></td>
+    <% end %>
+    <td><%= item.model_name %></td>
+    <td>$<%= item.list_price %></td>
+    <td><%= item.release_date %></td>
+    <td><%= link_to 'E', edit_item_path(item) %></td>
+    <td><%= link_to 'X', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Item', new_item_path %>

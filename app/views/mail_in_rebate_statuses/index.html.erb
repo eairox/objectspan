@@ -1,0 +1,23 @@
+<h1>Listing mail_in_rebate_statuses</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @mail_in_rebate_statuses.each do |mail_in_rebate_status| %>
+  <tr>
+    <td><%= mail_in_rebate_status.name %></td>
+    <td><%= link_to 'Show', mail_in_rebate_status %></td>
+    <td><%= link_to 'Edit', edit_mail_in_rebate_status_path(mail_in_rebate_status) %></td>
+    <td><%= link_to 'Destroy', mail_in_rebate_status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Mail in rebate status', new_mail_in_rebate_status_path %>

@@ -11,18 +11,385 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121129083344) do
+ActiveRecord::Schema.define(:version => 20121207203307) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "companies", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "fax"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.integer  "state_id"
+    t.string   "other_state"
+    t.string   "zipcode"
+    t.integer  "country_id"
+    t.text     "description"
+    t.boolean  "user_favorite"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+  end
+
+  create_table "company_categorizations", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "company_category_return_policies", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "return_category_id"
+    t.float    "restocking_fee_precentage"
+    t.date     "holiday_purchase_date_from"
+    t.date     "holiday_purchase_date_to"
+    t.date     "holiday_return_date"
+    t.integer  "return_duration"
+    t.integer  "return_duration_type_id"
+    t.integer  "exchange_duration"
+    t.integer  "exchange_duration_type_id"
+    t.boolean  "rma_required"
+    t.boolean  "open_used_returnable"
+    t.text     "restrictions"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "company_contacts", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "contact_type"
+    t.string   "contact_value"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "company_countries", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "country_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "company_items", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "item_id"
+    t.string   "sku"
+    t.float    "price"
+    t.string   "url"
+    t.integer  "store_return_category_id"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  create_table "company_return_policies", :force => true do |t|
+    t.integer  "company_id"
+    t.text     "return_policy"
+    t.string   "return_policy_url"
+    t.text     "return_policy_faq"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "company_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "countries", :force => true do |t|
+    t.string   "code"
+    t.string   "name"
+    t.integer  "rank"
+    t.boolean  "is_obsolete"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "duration_frequencies", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "exchange_duration_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "item_categorizations", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "items", :force => true do |t|
+    t.string   "name"
+    t.string   "short_description"
+    t.string   "upc"
+    t.text     "full_description"
+    t.text     "features"
+    t.integer  "make_id"
+    t.string   "model_name"
+    t.float    "list_price"
+    t.date     "release_date"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
+  create_table "mail_in_rebate_statuses", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "makes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "payment_methods", :force => true do |t|
+    t.string   "name"
+    t.float    "protection_duration"
+    t.integer  "duration_frequency_id"
+    t.float    "protection_limit"
+    t.boolean  "purchase_protection"
+    t.boolean  "stolen"
+    t.boolean  "lost"
+    t.boolean  "water_damaged"
+    t.boolean  "return_protection"
+    t.boolean  "warranty_protection"
+    t.float    "warranty_duration"
+    t.float    "per_item_limit"
+    t.boolean  "wordwide"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
+  create_table "products", :force => true do |t|
+    t.string   "name"
+    t.string   "short_description"
+    t.string   "upc"
+    t.text     "full_description"
+    t.text     "features"
+    t.integer  "make_id"
+    t.string   "model_name"
+    t.float    "list_price"
+    t.date     "release_date"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "purchase_feedbacks", :force => true do |t|
+    t.integer  "purchase_id"
+    t.integer  "shopping_experience_rating"
+    t.integer  "shop_again_in_next_6_month"
+    t.integer  "recommends_to_friend"
+    t.text     "feedback_improvement"
+    t.integer  "company_feedback_rating_question_id"
+    t.text     "company_feedback_answer_comments"
+    t.integer  "company_feedback_answer"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
+
+  create_table "purchase_item_feedbacks", :force => true do |t|
+    t.integer  "purchase_item_id"
+    t.integer  "item_rating"
+    t.integer  "buy_again_in_next_6_month"
+    t.integer  "recommends_to_friend"
+    t.text     "feedback_improvement"
+    t.integer  "item_feedback_rating_question_id"
+    t.text     "item_feedback_answer_comments"
+    t.integer  "item_feedback_answer"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "purchase_item_statuses", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "purchase_items", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "purchase_id"
+    t.string   "serial_number"
+    t.float    "quantity"
+    t.float    "price"
+    t.integer  "purchase_status_id"
+    t.float    "tax"
+    t.float    "shipping"
+    t.float    "other_cost"
+    t.float    "discount"
+    t.float    "total"
+    t.float    "mail_in_rebate"
+    t.date     "mail_in_rebate_date"
+    t.integer  "mail_in_rebate_status_id"
+    t.date     "return_date"
+    t.integer  "return_store_id"
+    t.string   "return_tracking"
+    t.integer  "purchase_item_status_id"
+    t.integer  "user_id"
+    t.boolean  "tax_deductable"
+    t.boolean  "hsa_eligible"
+    t.text     "notes"
+    t.integer  "item_feedback_rating_id"
+    t.text     "item_feedback"
+    t.datetime "feedback_date"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  create_table "purchase_statuses", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "purchases", :force => true do |t|
+    t.string   "name"
+    t.integer  "group_id"
+    t.integer  "company_id"
+    t.integer  "store_id"
+    t.datetime "purchase_date"
+    t.integer  "payment_method_id"
+    t.integer  "visibility_id"
+    t.integer  "user_id"
+    t.string   "order_number"
+    t.integer  "merchant_type_id"
+    t.integer  "purchase_feedback_id"
+    t.integer  "store_feedback_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "receipt_file_name"
+    t.string   "receipt_content_type"
+    t.integer  "receipt_file_size"
+    t.datetime "receipt_updated_at"
+  end
+
+  create_table "return_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "return_duration_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "states", :force => true do |t|
+    t.string   "name"
+    t.string   "state_code"
+    t.integer  "country_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "store_return_categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "return_category_id"
+    t.boolean  "refund_allowed"
+    t.integer  "return_duration"
+    t.integer  "duration_frequency_id"
+    t.integer  "store_id"
+    t.boolean  "exchange_allowed"
+    t.boolean  "store_credit"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  create_table "store_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "stores", :force => true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.integer  "state_id"
+    t.integer  "country_id"
+    t.string   "other_state"
+    t.string   "zipcode"
+    t.string   "phone"
+    t.string   "longitude"
+    t.string   "latitude"
+    t.string   "store_url"
+    t.text     "description"
+    t.float    "rating"
+    t.string   "fax"
+    t.string   "email"
+    t.integer  "store_type_id"
+    t.string   "store_number"
+    t.boolean  "user_favorite"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
+
+  create_table "visibilities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

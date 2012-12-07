@@ -1,0 +1,23 @@
+<h1>Listing duration_frequencies</h1>
+
+<table class="table table-hover">
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @duration_frequencies.each do |duration_frequency| %>
+  <tr>
+    <td><%= duration_frequency.name %></td>
+    <td><%= link_to 'Show', duration_frequency %></td>
+    <td><%= link_to 'Edit', edit_duration_frequency_path(duration_frequency) %></td>
+    <td><%= link_to 'Destroy', duration_frequency, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Duration frequency', new_duration_frequency_path %>

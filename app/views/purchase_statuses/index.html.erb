@@ -1,0 +1,23 @@
+<h1>Listing purchase_statuses</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @purchase_statuses.each do |purchase_status| %>
+  <tr>
+    <td><%= purchase_status.name %></td>
+    <td><%= link_to 'Show', purchase_status %></td>
+    <td><%= link_to 'Edit', edit_purchase_status_path(purchase_status) %></td>
+    <td><%= link_to 'Destroy', purchase_status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Purchase status', new_purchase_status_path %>

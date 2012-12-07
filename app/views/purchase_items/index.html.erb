@@ -1,0 +1,47 @@
+<h1>Purchase Items</h1>
+
+<table class="table table-hover">
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th>Item</th>
+    <th>Quantity</th>
+    <th>Serial number</th>
+    <th>Store</th>
+    <th>Purchase status</th>
+    <th>Purchase</th>
+    <th>Price</th>
+    <th>Tax</th>
+    <th>Shipping</th>
+    <th>Total</th>
+    <th>Mail in rebate status</th>
+    <th>Purchase item status</th>
+    <th></th>
+  </tr>
+
+<% @purchase_items.each do |purchase_item| %>
+  <tr>
+    <td><%= link_to raw("<i class=\"icon-edit \"></i>"), edit_purchase_item_path(purchase_item) %></td>
+    <td><%= link_to raw("<i class=\"icon-remove \"></i>"), purchase_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', purchase_item %></td>
+    <td><%= purchase_item.item.name %></td>
+    <td><%= purchase_item.quantity %></td>
+    <td><%= purchase_item.serial_number %></td>
+    <td><%= purchase_item.store.name %></td>
+    <td><%= purchase_item.purchase_status_id %></td>
+    <td><%= purchase_item.purchase.name %></td>
+    <td><%= purchase_item.price %></td>    
+    <td><%= purchase_item.tax %></td>
+    <td><%= purchase_item.shipping %></td>
+    <td><%= purchase_item.total %></td>
+    <td><%= purchase_item.mail_in_rebate_status_id %></td>
+    <td><%= purchase_item.purchase_item_status_id %></td>
+    
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Purchase item', new_purchase_item_path %>

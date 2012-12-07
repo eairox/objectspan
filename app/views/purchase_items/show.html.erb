@@ -1,0 +1,91 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+
+<div class="span6">
+  <b>Item:</b>
+  <%= link_to @purchase_item.item.name, @purchase_item.item %>
+</div>
+
+<div class="span6">
+  <b>Quantity:</b>
+  <%= @purchase_item.quantity %>
+</div>
+
+<div class="span6">
+  <b>Serial number:</b>
+  <%= @purchase_item.serial_number %>
+</div>
+
+<div class="span6">
+  <b>Store:</b>
+  <%= link_to @purchase_item.store.name, @purchase_item.store %>
+</div>
+
+
+<div class="span6">
+  <b>Purchase status:</b>
+  <%= @purchase_item.purchase_status_id %>
+</div>
+
+<div class="span6">
+  <b>Purchase:</b>
+  <%= @purchase_item.purchase.name %>
+</div>
+</div>
+<br>
+<table class="table table-condensed table-bordered">
+  <tr>
+    <td>Price:</td><td><%= @purchase_item.price %></td>
+  </tr>
+  <tr>
+    <td>Tax:</td><td><%= @purchase_item.tax %>
+  </tr>
+  <tr>
+    <td>Shipping:</td><td><%= @purchase_item.shipping %>
+  </tr>
+  <tr>
+    <td>Total:</td><td><%= @purchase_item.total %>
+  </tr>
+  </table>
+
+<h2> Mail-in-Rebate </h2>
+<p>
+  <b>Mail in rebate:</b>
+  <%= @purchase_item.mail_in_rebate %>
+</p>
+
+<p>
+  <b>Mail in rebate date:</b>
+  <%= @purchase_item.mail_in_rebate_date %>
+</p>
+
+<p>
+  <b>Mail in rebate status:</b>
+  <%= @purchase_item.mail_in_rebate_status_id %>
+</p>
+
+<h2>Return</h2>
+<p>
+  <b>Return date:</b>
+  <%= @purchase_item.return_date %>
+</p>
+
+<p>
+  <b>Return store:</b>
+  <%= @purchase_item.return_store_id %>
+</p>
+
+<p>
+  <b>Return tracking:</b>
+  <%= @purchase_item.return_tracking %>
+</p>
+
+<p>
+  <b>Purchase item status:</b>
+  <%= @purchase_item.purchase_item_status_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_purchase_item_path(@purchase_item) %> |
+<%= link_to 'Back', purchase_items_path %>

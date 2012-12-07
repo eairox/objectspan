@@ -1,0 +1,33 @@
+<%= form_for(@company_return_policy) do |f| %>
+  <% if @company_return_policy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@company_return_policy.errors.count, "error") %> prohibited this company_return_policy from being saved:</h2>
+
+      <ul>
+      <% @company_return_policy.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :company_id %><br />
+    <%= f.number_field :company_id %>
+  </div>
+  <div class="field">
+    <%= f.label :return_policy %><br />
+    <%= f.text_area :return_policy %>
+  </div>
+  <div class="field">
+    <%= f.label :return_policy_url %><br />
+    <%= f.text_field :return_policy_url %>
+  </div>
+  <div class="field">
+    <%= f.label :return_policy_faq %><br />
+    <%= f.text_area :return_policy_faq %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

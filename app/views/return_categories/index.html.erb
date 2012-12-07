@@ -1,0 +1,23 @@
+<h1>Listing return_categories</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @return_categories.each do |return_category| %>
+  <tr>
+    <td><%= return_category.name %></td>
+    <td><%= link_to 'Show', return_category %></td>
+    <td><%= link_to 'Edit', edit_return_category_path(return_category) %></td>
+    <td><%= link_to 'Destroy', return_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Return category', new_return_category_path %>

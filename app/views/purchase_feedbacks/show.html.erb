@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Purchase:</b>
+  <%= @purchase_feedback.purchase_id %>
+</p>
+
+<p>
+  <b>Shopping experience rating:</b>
+  <%= @purchase_feedback.shopping_experience_rating %>
+</p>
+
+<p>
+  <b>Shop again in next 6 month:</b>
+  <%= @purchase_feedback.shop_again_in_next_6_month %>
+</p>
+
+<p>
+  <b>Recommends to friend:</b>
+  <%= @purchase_feedback.recommends_to_friend %>
+</p>
+
+<p>
+  <b>Feedback improvement:</b>
+  <%= @purchase_feedback.feedback_improvement %>
+</p>
+
+<p>
+  <b>Company feedback rating question:</b>
+  <%= @purchase_feedback.company_feedback_rating_question_id %>
+</p>
+
+<p>
+  <b>Company feedback answer comments:</b>
+  <%= @purchase_feedback.company_feedback_answer_comments %>
+</p>
+
+<p>
+  <b>Company feedback answer:</b>
+  <%= @purchase_feedback.company_feedback_answer %>
+</p>
+
+
+<%= link_to 'Edit', edit_purchase_feedback_path(@purchase_feedback) %> |
+<%= link_to 'Back', purchase_feedbacks_path %>

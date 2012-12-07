@@ -1,0 +1,37 @@
+<h1>Purchases</h1>
+
+<table class="table table-hover">
+  <tr>
+    <th>Name</th>
+    <th>Group</th>
+    <th>Store</th>
+    <th>Purchase Date</th>
+    <th>Payment method</th>
+    <th>Visibility</th>
+    <th>User</th>
+    <th>Number of Items</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @purchases.each do |purchase| %>
+  <tr>
+    <td><%= purchase.name %></td>
+    <td><%= link_to purchase.group.name, purchase.group %></td>
+    <td><%= link_to purchase.store.name, purchase.store %></td>
+    <td><%= purchase.purchase_date %></td>
+    <td><%= purchase.payment_method.name %></td>
+    <td><%= purchase.visibility.name unless purchase.visibility_id.nil? %></td>
+    <td><%= image_tag purchase.user.photo.url(:thumb) %><%= purchase.user.name unless purchase.user_id.nil? %></td>
+    <td><%= purchase.purchase_items.count %></td>
+    <td><%= link_to 'Show', purchase %></td>
+    <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
+    <td><%= link_to 'Destroy', purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Purchase', new_purchase_path %>

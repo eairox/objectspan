@@ -1,0 +1,37 @@
+<h1>Listing purchase_feedbacks</h1>
+
+<table>
+  <tr>
+    <th>Purchase</th>
+    <th>Shopping experience rating</th>
+    <th>Shop again in next 6 month</th>
+    <th>Recommends to friend</th>
+    <th>Feedback improvement</th>
+    <th>Company feedback rating question</th>
+    <th>Company feedback answer comments</th>
+    <th>Company feedback answer</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @purchase_feedbacks.each do |purchase_feedback| %>
+  <tr>
+    <td><%= purchase_feedback.purchase_id %></td>
+    <td><%= purchase_feedback.shopping_experience_rating %></td>
+    <td><%= purchase_feedback.shop_again_in_next_6_month %></td>
+    <td><%= purchase_feedback.recommends_to_friend %></td>
+    <td><%= purchase_feedback.feedback_improvement %></td>
+    <td><%= purchase_feedback.company_feedback_rating_question_id %></td>
+    <td><%= purchase_feedback.company_feedback_answer_comments %></td>
+    <td><%= purchase_feedback.company_feedback_answer %></td>
+    <td><%= link_to 'Show', purchase_feedback %></td>
+    <td><%= link_to 'Edit', edit_purchase_feedback_path(purchase_feedback) %></td>
+    <td><%= link_to 'Destroy', purchase_feedback, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Purchase feedback', new_purchase_feedback_path %>

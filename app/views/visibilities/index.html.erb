@@ -1,0 +1,23 @@
+<h1>Listing visibilities</h1>
+
+<table class="table table-hover">
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @visibilities.each do |visibility| %>
+  <tr>
+    <td><%= visibility.name %></td>
+    <td><%= link_to 'Show', visibility %></td>
+    <td><%= link_to 'Edit', edit_visibility_path(visibility) %></td>
+    <td><%= link_to 'Destroy', visibility, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Visibility', new_visibility_path %>

@@ -1,0 +1,93 @@
+<h1><%= image_tag @payment_method.photo.url(:small) %> <%= @payment_method.name %></h1>
+
+
+<p>
+  <b>Protection duration:</b>
+  <%= @payment_method.protection_duration %>
+</p>
+
+<p>
+  <b>Duration frequency:</b>
+  <%= @payment_method.duration_frequency_id %>
+</p>
+
+<p>
+  <b>Protection limit:</b>
+  <%= @payment_method.protection_limit %>
+</p>
+
+<p>
+  <b>Purchase protection:</b>
+  <% if @payment_method.purchase_protection %>
+    <i class="icon-ok"></i>  
+  <% else %>
+    <i class="icon-remove"></i>
+  <% end %>
+  
+</p>
+
+<p>
+  <b>Stolen Coverage:</b>
+    <% if @payment_method.stolen %>
+    <i class="icon-ok"></i>  
+  <% else %>
+    <i class="icon-remove"></i>
+  <% end %>
+</p>
+
+<p>
+  <b>Lost:</b>
+    <% if @payment_method.lost %>
+    <i class="icon-ok"></i>  
+  <% else %>
+    <i class="icon-remove"></i>
+  <% end %>
+</p>
+
+<p>
+  <b>Water damaged:</b>
+  <%= @payment_method.water_damaged %>
+    <% if @payment_method.water_damaged %>
+    <i class="icon-ok"></i>  
+  <% else %>
+    <i class="icon-remove"></i>
+  <% end %>
+</p>
+
+<p>
+  <b>Return protection:</b>
+  <% if @payment_method.return_protection %>
+    <i class="icon-ok"></i>  
+  <% else %>
+    <i class="icon-remove"></i>
+  <% end %>
+</p>
+
+<p>
+  <b>Warranty protection:</b>
+  
+  <% if @payment_method.warranty_protection %>
+    <i class="icon-ok"></i>  
+  <% else %>
+    <i class="icon-remove"></i>
+  <% end %>
+</p>
+
+<p>
+  <b>Warranty duration:</b>
+  <%= @payment_method.warranty_duration %>
+</p>
+
+<p>
+  <b>Per item limit:</b>
+  <%= @payment_method.per_item_limit %>
+</p>
+
+<p>
+  <b>Wordwide:</b>
+  <%= @payment_method.wordwide %>
+</p>
+
+
+<%= link_to 'Edit', edit_payment_method_path(@payment_method) %> |
+<%= link_to 'Back', payment_methods_path %>

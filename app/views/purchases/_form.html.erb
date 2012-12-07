@@ -1,0 +1,111 @@
+<%= form_for(@purchase) do |f| %>
+  <% if @purchase.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
+
+      <ul>
+      <% @purchase.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<div class="row">
+
+  <div class="span2">
+    <%= f.label :purchase_date %>
+  </div>
+
+  <div class="span4">
+    <%= f.text_field :purchase_date, :class => 'datepicker' %>
+  </div>
+
+<!--
+  <div class="span2">
+    <%= f.label :name %>
+  </div>
+
+  <div class="span4">
+    <%= f.text_field :name %>
+  </div>
+-->
+
+  <div class="span2">
+    <%= f.label :group_id %>
+  </div>
+
+  <div class="span4">
+    <div class="ui-widget">
+      <%= f.text_field :group_id,  :class => "purchase_groups" %>
+    </div>
+    <%= f.select(:group_id, Group.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>
+  </div>
+
+
+<!--
+-->
+
+  <!-- Show only if selected company has stores  -->
+
+  <div class="span2">
+    <%= f.label :store_id %>
+  </div>
+
+  <div class="span4">
+    <%= f.select(:store_id, Store.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>  
+  </div>
+
+
+  <div class="span2">
+    <%= f.label :payment_method_id %>
+  </div>
+
+  <div class="span4">
+    <%= f.select(:payment_method_id, PaymentMethod.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>  
+  </div>
+
+  <div class="span2">
+    <%= f.label :visibility_id %>
+  </div>
+
+  <div class="span4">
+    <%= f.select(:visibility_id, Visibility.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>  
+  </div>
+</div>
+
+<h2> Items </h2>
+
+<table class="table">
+  <tr>
+    <th>Item</th>
+    <th>Quantity</th>
+    <th>Price</th>
+  </tr>
+  <% @purchase.purchase_items.each do |item| %>
+    <tr>
+      <td><%= item.item.name %></td>
+      <td><%= item.quantity %></td>
+      <td><%= item.total %></td>
+
+    </tr>
+
+  <% end %>
+</table>
+
+<h2> Attachments </h2>
+<div>
+  Receipt: <%= f.file_field :receipt %>
+
+</div>
+
+
+<!-- Items -->
+
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

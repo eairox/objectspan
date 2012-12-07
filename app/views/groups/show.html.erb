@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h1><%= @group.name %></h1>
+
+
+  <% @group.purchases.each do  |p|   %>
+	<div class="row">
+  		<b><%= link_to p.name, p %></b>
+  		<b>Purchase Date:</b> <%= p.purchase_date %>
+ 	</div>
+ 	<br>
+  <% end %>
+</p>
+
+
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %>

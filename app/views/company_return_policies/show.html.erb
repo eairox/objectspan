@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Company:</b>
+  <%= @company_return_policy.company_id %>
+</p>
+
+<p>
+  <b>Return policy:</b>
+  <%= @company_return_policy.return_policy %>
+</p>
+
+<p>
+  <b>Return policy url:</b>
+  <%= @company_return_policy.return_policy_url %>
+</p>
+
+<p>
+  <b>Return policy faq:</b>
+  <%= @company_return_policy.return_policy_faq %>
+</p>
+
+
+<%= link_to 'Edit', edit_company_return_policy_path(@company_return_policy) %> |
+<%= link_to 'Back', company_return_policies_path %>

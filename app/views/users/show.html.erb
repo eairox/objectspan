@@ -2,14 +2,28 @@
 <div class="row">
   <aside class="span4">
     <section>
+
       <h1>
-        <%= gravatar_for @user %>
+        <%= image_tag @user.photo.url(:small) %>
         <%= @user.name %>
         
       </h1>
 	  <%= @user.email %>
 
     </section>
+    <aside class="span8">
+
+      <div>Purchases</div>
+      <ul>
+        <% @user.purchases.each do |purchase| %>
+          <% purchase.purchase_items.each do |i| %>
+      
+          <li>  <%= link_to i.item.name, i.item %> </li>
+
+          <% end %>
+        <% end %>
+      </ul>
+      
     <% if current_user.admin? && !current_user?(@user) %>
      <%= link_to "edit", edit_user_path(@user) %>
     | <%= link_to "delete", @user, method: :delete,

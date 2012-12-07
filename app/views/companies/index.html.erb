@@ -1,0 +1,48 @@
+<h1>Company List</h1>
+
+<table class="table table-hover">
+  <tr>
+    <th>&nbsp;</th>
+    <th>Name</th>
+    <th>Url</th>
+    <th>Phone</th>
+    <th>Fax</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zipcode</th>
+    <th>Country</th>
+    <th>No of stores</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @companies.each do |company| %>
+  <tr>
+   <td><%= image_tag company.logo.url(:thumb)  %></td> 
+    <td><%= company.name %></td>
+    <td><%= company.url %></td>
+    <td><%= company.phone %></td>
+    <td><%= company.fax %></td>
+    <td><%= company.city %></td>
+    <td>
+        <% if !company.state_id.nil? %>
+            <%= company.state.name %>
+        <% else %>
+            <%= company.other_state unless company.other_state.blank? %>
+        <% end %>
+    </td>
+    
+    <td><%= company.zipcode %></td>
+    <td><%= company.country.name unless company.country_id.nil? %></td>
+    <td><%= company.stores.count %></td>
+    <td><%= link_to 'Show', company %></td>
+    <td><%= link_to 'Edit', edit_company_path(company) %></td>
+    <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Company', new_company_path %>

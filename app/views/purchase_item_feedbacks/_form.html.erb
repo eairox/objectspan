@@ -1,0 +1,49 @@
+<%= form_for(@purchase_item_feedback) do |f| %>
+  <% if @purchase_item_feedback.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@purchase_item_feedback.errors.count, "error") %> prohibited this purchase_item_feedback from being saved:</h2>
+
+      <ul>
+      <% @purchase_item_feedback.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :purchase_item_id %><br />
+    <%= f.number_field :purchase_item_id %>
+  </div>
+  <div class="field">
+    <%= f.label :item_rating %><br />
+    <%= f.number_field :item_rating %>
+  </div>
+  <div class="field">
+    <%= f.label :buy_again_in_next_6_month %><br />
+    <%= f.number_field :buy_again_in_next_6_month %>
+  </div>
+  <div class="field">
+    <%= f.label :recommends_to_friend %><br />
+    <%= f.number_field :recommends_to_friend %>
+  </div>
+  <div class="field">
+    <%= f.label :feedback_improvement %><br />
+    <%= f.text_area :feedback_improvement %>
+  </div>
+  <div class="field">
+    <%= f.label :item_feedback_rating_question_id %><br />
+    <%= f.number_field :item_feedback_rating_question_id %>
+  </div>
+  <div class="field">
+    <%= f.label :item_feedback_answer_comments %><br />
+    <%= f.text_area :item_feedback_answer_comments %>
+  </div>
+  <div class="field">
+    <%= f.label :item_feedback_answer %><br />
+    <%= f.number_field :item_feedback_answer %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+<%= form_for(@duration_frequency) do |f| %>
+  <% if @duration_frequency.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@duration_frequency.errors.count, "error") %> prohibited this duration_frequency from being saved:</h2>
+
+      <ul>
+      <% @duration_frequency.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

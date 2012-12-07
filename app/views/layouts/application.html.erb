@@ -8,6 +8,20 @@
   <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
+  <script>
+    $(function() {
+        var groups = <%= raw Group.pluck(:name).as_json %>;
+        $( "#purchase_group_id" ).autocomplete({
+            source: groups
+        });
+        $( "#item_release_date" ).datepicker();
+        $( "#purchase_purchase_date" ).datepicker();
+
+
+    });
+
+    
+    </script>
 </head>
 <body>
   <%= render 'layouts/header' %>
