@@ -15,3 +15,6 @@
 //= require_tree .
 //= require bootstrap
 //= require jquery-ui
+//= require fancybox
+//= require jquery_nested_form
+

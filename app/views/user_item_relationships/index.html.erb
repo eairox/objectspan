@@ -1,0 +1,29 @@
+<h1>Listing user_item_relationships</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Item</th>
+    <th>Relationship type</th>
+    <th>Relationship date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_item_relationships.each do |user_item_relationship| %>
+  <tr>
+    <td><%= user_item_relationship.user_id %></td>
+    <td><%= user_item_relationship.item_id %></td>
+    <td><%= user_item_relationship.relationship_type_id %></td>
+    <td><%= user_item_relationship.relationship_date %></td>
+    <td><%= link_to 'Show', user_item_relationship %></td>
+    <td><%= link_to 'Edit', edit_user_item_relationship_path(user_item_relationship) %></td>
+    <td><%= link_to 'Destroy', user_item_relationship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User item relationship', new_user_item_relationship_path %>

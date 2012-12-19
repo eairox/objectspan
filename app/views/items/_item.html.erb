@@ -1,0 +1,10 @@
+<li>
+<a href = "">
+  <p class="content"> <%= image_tag item.photo.url(:small) %><%= item.name %></p>
+  </a>
+  <span class="timestamp">
+    Purchased <%= time_ago_in_words(item.purchase_items.first.purchase.purchase_date) unless item.purchase_items.empty? %> ago.
+  </span>
+
+
+</li>

@@ -2,7 +2,14 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    @q = Item.search(params[:q])
+      
+    @items = @q.result(:distinct => true).order("created_at desc")
+    
+  @q.build_condition if @q.conditions.empty?
+  @q.build_sort if @q.sorts.empty?
+
+  
 
     respond_to do |format|
       format.html # index.html.erb

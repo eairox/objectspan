@@ -20,7 +20,8 @@
     <% if !@store.address2.nil? %>
       <%= @store.address2 %>
     <% end %>
-    <br><%= @store.city%>, <%= @store.state.state_code unless @store.state_id.nil? %> <%= @store.zipcode %>, <%= @store.country.name %> 
+    <br><%= @store.city%>, <%= @store.state.state_code unless @store.state.nil? %> 
+    <%= @store.zipcode %>, <%= @store.country.name unless @store.country.nil?  %> 
     <br><strong>Phone:</strong> <%= @store.phone %>
     <br>Fax: <%= @store.fax %>
     <br>web: <%= @store.store_url %>
@@ -32,8 +33,8 @@
   
   <div class="span4">
     <b>Friends who have shopped here:</b>
-    <% @store.purchases.pluck(:user) do |p| %>
-    <br><%= p.name %>
+    <% @store.purchases.each do |p| %>
+    <br><%= p.user.name unless p.user.nil? %> 
     <% end %>
   </div>
 

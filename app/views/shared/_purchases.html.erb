@@ -1,0 +1,6 @@
+<% if @purchase_items.any? %>
+  <ol class="purchase_items">
+    <%= render partial: 'shared/purchase_item', collection: @purchase_items %>
+  </ol>
+
+<% end %>

@@ -1,0 +1,7 @@
+<%= form_for(@user_item_relationship) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+      <%= f.select(:relationship_type_id, RelationshipType.all.collect{ |g| [g.name, g.id]}) %>
+  </div>
+  <%= f.submit "Create Relationship", class: "btn btn-large btn-primary" %>
+<% end %>

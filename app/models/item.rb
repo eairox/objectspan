@@ -7,8 +7,11 @@ class Item < ActiveRecord::Base
 	has_many :item_categorizations
 	has_many :categories, :through => :item_categorizations
 
+	has_many :users, :through => :user_item_relationships, :dependent => :destroy
+	has_many :user_item_relationships
+
 	
-	has_attached_file :photo, :styles => { :small => "150x150>", :medium => "300x300>", :thumb => "50x50>" },
+	has_attached_file :photo, :styles => { :small => "150>x140", :medium => "300x300>", :thumb => "50x50>" },
 							  :url  => "/assets/items/:id/photo/:style/:basename.:extension",
                   			  :path => ":rails_root/public/assets/items/:id/photo/:style/:basename.:extension"
 

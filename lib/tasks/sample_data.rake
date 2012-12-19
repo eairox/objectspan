@@ -1,6 +1,12 @@
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
+    
+    ca = State.find_by_name("California").id
+    us = Country.find_by_name("United States").id
+
+  puts "Creating users..."
+
     admin = User.create!(name: "Umesh Garg",
                  email: "eairox@gmail.com",
                  password: "123456",
@@ -16,17 +22,18 @@ namespace :db do
                    password_confirmation: password)
     end
 
+    puts "Creating companies..."
     company = Company.create!(name: "Walmart",
                     url:"www.walmart.com",
                     phone: "1-800-WALMART",
-                    country_id: 2,
+                    country_id: us,
                     description: "Walmart.com is a lot like your neighborhood Walmart store. We feature a great selection of high-quality merchandise, friendly service and, of course, Every Day Low Prices. We also have another goal: to bring you the best shopping experience on the Internet."
     )
 
     company = Company.create!(name: "Buy.com",
                     url:"www.buy.com",
                     phone: "1-800-888-BUY1",
-                    country_id: 2,
+                    country_id: us,
                     description: "Buy.com is a great online place for shopping"
     )
 
@@ -39,30 +46,13 @@ namespace :db do
       Company.create(name:name,
                      url: url,
                      phone:phone,
-                     country_id:2,
+                     country_id:us,
                      description:description)
     end
 
-    PurchaseItemStatus.create!(name: "Ordered")
-    PurchaseItemStatus.create!(name: "Shipped")
-    PurchaseItemStatus.create!(name: "Purchased")
-    PurchaseItemStatus.create!(name: "Returned")
-    PurchaseItemStatus.create!(name: "Donated")
-    PurchaseItemStatus.create!(name: "Consumed")
-    PurchaseItemStatus.create!(name: "Discarded")
 
-    Group.create!(name: "My Birthday")
-    Group.create!(name: "Business")
-    Group.create!(name: "Hawaii Trip")
-    Group.create!(name: "Jessica's Baby Shower")
 
-    Visibility.create!(name: "Public")
-    Visibility.create!(name: "Friends")
-    Visibility.create!(name: "Family")
-    Visibility.create!(name: "Friends & Family")
-    Visibility.create!(name: "Only Me")
-
- 
+    puts "Creating Categories..."
 
     Category.create!(name: "Electronics")
     Category.create!(name: "Baby")
@@ -74,51 +64,32 @@ namespace :db do
     Category.create!(name: "Grocery")
     Category.create!(name: "Software")
 
+    puts "Creating Make..."
+
+    Make.create!(name: "BOSS")
+    Make.create!(name: "HP")   
+    Make.create!(name: "Apple")   
+    Make.create!(name: "Samsung")
+    Make.create!(name: "Nissan")
+    Make.create!(name: "DELL")
+
+    
+
+
+
+
+
     CompanyCategorization.create!(category_id: 6, company_id: 1)
     CompanyCategorization.create!(category_id: 1, company_id: 1)
     CompanyCategorization.create!(category_id: 1, company_id: 2)
 
 
-    StoreType.create!(name: "Online")
-    StoreType.create!(name: "Brick & Mortar")
 
 
-    Country.create!(code: "CN",
-                    name: "Canada",
-                    rank: 0,
-                    is_obsolete: false)
-    Country.create!(code: "US",
-                    name: "United Stated of America",
-                    rank: 0,
-                    is_obsolete: false)
-    Country.create!(code: "GB",
-                    name: "Great Britain",
-                    rank: 0,
-                    is_obsolete: false)
-    Country.create!(code: "MX",
-                    name: "Mexico",
-                    rank: 0,
-                    is_obsolete: false)
 
-    State.create!(name: "California",
-                  state_code: "CA",
-                  country_id: 2)
 
-    State.create!(name: "Arizona",
-                  state_code: "AZ",
-                  country_id: 2)
+    puts "Creating Stores..."
 
-    State.create!(name: "Florida",
-                  state_code: "FL",
-                  country_id: 2)
-
-    State.create!(name: "British Columbia",
-                  state_code: "BL",
-                  country_id: 1)
-
-    State.create!(name: "Yukon",
-                  state_code: "YN",
-                  country_id: 1)
 
     Store.create!(name: "Milpitas Walmart Store #2119",
                   company_id: 1,
@@ -126,8 +97,8 @@ namespace :db do
                   store_number: "2119",
                   address1: "301 Ranch Dr",
                   city: "Milpitas",
-                  state_id: 1,
-                  country_id: 1,
+                  state_id: ca,
+                  country_id: us,
                   zipcode: "94040",
                   phone: "(408) 934-0304",
                   )
@@ -138,8 +109,8 @@ namespace :db do
                   store_number: "3025",
                   address1: "1600 Saratoga Ave Unit 501",
                   city: "San Jose",
-                  state_id: 1,
-                  country_id: 1,
+                  state_id: ca,
+                  country_id: us,
                   zipcode: "95129",
                   phone: "(408) 796-3823",
                   )
@@ -150,8 +121,8 @@ namespace :db do
                   store_number: "2989",
                   address1: "40580 Albrae St",
                   city: "Fremont",
-                  state_id: 1,
-                  country_id: 1,
+                  state_id: ca,
+                  country_id: us,
                   zipcode: "94538",
                   phone: "(510) 440-8060",
                   )
@@ -169,22 +140,9 @@ namespace :db do
                   )
 
     
-    Make.create!(name: "BOSS")
-    Make.create!(name: "HP")   
-    Make.create!(name: "Apple")   
-    Make.create!(name: "Samsung")
-    Make.create!(name: "Nissan")
-    Make.create!(name: "DELL")
+        puts "Creating Items..."
 
-    PaymentMethod.create(name: "Visa")
-    PaymentMethod.create(name: "American Express")
-    PaymentMethod.create(name: "Discover")
-    PaymentMethod.create(name: "Mastercard")
-    PaymentMethod.create(name: "Check")
-    PaymentMethod.create(name: "Cash")
-
-
-
+    
     Item.create!(name: "Macbook Air",
                   upc: "123123123",
                   make_id: 3,
@@ -201,7 +159,8 @@ namespace :db do
                     Width: 11.8 inches (30 cm)
                     Depth: 7.56 inches (19.2 cm)
                     Weight: 2.38 pounds (1.08 kg)
-                    ")
+                    "
+                    )
     
     Item.create!(name: "Dell Latitude",
                   upc: "11111111",
@@ -231,46 +190,59 @@ namespace :db do
                     Weight: 2.38 pounds (1.08 kg)
                     ")
 
-    Purchase.create(group_id: 1,
+
+    puts "Creating Purchases..."
+
+    p1= User.find(1).purchases.create!(
                         store_id: 1,
-                        visibility_id: 1,
                         payment_method_id: 1,
-                        user_id: 1)
-
-    Purchase.create(group_id: 1,
-                        store_id: 1,
-                        visibility_id: 1,
-                        payment_method_id: 1,
-                        user_id: 1)
-
-    Purchase.create(group_id: 2,
-                        store_id: 2,
-                        visibility_id: 2,
-                        payment_method_id: 2,
-                        user_id: 2)
-
-    Purchase.create(group_id: 1,
-                        store_id: 1,
-                        visibility_id: 1,
-                        payment_method_id: 1,
-                        user_id: 3)
-
-    PurchaseItem.create(purchase_id: 1,
-                        item_id: 1,
-                        quantity: 1,
-                        total: 1200.0
+                        purchase_date: Time.now - (3600*24*7),
+                        order_number: "172635343"
                         )
 
-    PurchaseItem.create(purchase_id: 1,
+    p2= User.find(1).purchases.create!(
+                        store_id: 1,
+                        payment_method_id: 1,
+                        purchase_date: Time.now,
+                        order_number: "18283733")
+
+    p3= User.find(2).purchases.create!(
+                        store_id: 2,
+                        payment_method_id: 2,
+                        purchase_date: Time.now - (3600*24*5))
+
+    p4 = User.find(3).purchases.create!(
+                        store_id: 1,
+                        payment_method_id: 1,
+                        purchase_date: Time.now)
+
+    puts "Creating purchase_items..."
+
+    p1.purchase_items.create!(
+                        item_id: 1,
+                        quantity: 1,
+                        total: 1200.0,
+                        visibility_id: 1,
+                        protection_date: Time.now  + (3600*24*30*12),
+                        allowed_return_date: Time.now  + (3600*24*30)
+                        )
+
+    p1.purchase_items.create!(
                         item_id: 2,
                         quantity: 1,
-                        total: 1100.0
+                        total: 1100.0,
+                        visibility_id: 2,
+                        protection_date: Time.now  + (3600*24*30*12),
+                        allowed_return_date: Time.now  + (3600*24*30)
                         )
 
-    PurchaseItem.create(purchase_id: 2,
+    p2.purchase_items.create!(
                         item_id: 1,
                         quantity: 5,
-                        total: 5000.0
+                        total: 5000.0,
+                        visibility_id: 1,
+                        protection_date: Time.now  + (3600*24*30*12),
+                        allowed_return_date: Time.now  + (3600*24*30)
                         )
 
 

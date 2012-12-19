@@ -4,30 +4,46 @@
     <section>
 
       <h1>
-        <%= image_tag @user.photo.url(:small) %>
+        <%= image_tag @user.photo.url(:thumb) %>
         <%= @user.name %>
         
       </h1>
-	  <%= @user.email %>
+  	  <%= @user.email %>
 
-    </section>
-    <aside class="span8">
+      <% if current_user.admin? && !current_user?(@user) %>
+       <%= link_to "edit", edit_user_path(@user) %>
+      | <%= link_to "delete", @user, method: :delete,
+                                    data: { confirm: "You sure?" } %>
+      <% end %>
 
-      <div>Purchases</div>
-      <ul>
-        <% @user.purchases.each do |purchase| %>
-          <% purchase.purchase_items.each do |i| %>
-      
-          <li>  <%= link_to i.item.name, i.item %> </li>
-
-          <% end %>
-        <% end %>
-      </ul>
-      
-    <% if current_user.admin? && !current_user?(@user) %>
-     <%= link_to "edit", edit_user_path(@user) %>
-    | <%= link_to "delete", @user, method: :delete,
-                                  data: { confirm: "You sure?" } %>
-  <% end %>
+  </section>
   </aside>
+
+  <div class="span8">
+
+    <% if @user.items.any? %>
+          <h3>Items Owned (<%= @user.owned_items.count %>)</h3>
+          <section>
+            <%= will_paginate @owned_items %>
+            <ul class="lb-album">
+              <%= render @owned_items || 'No items are owned' %>
+            </ul>
+
+        </section>
+        <%= will_paginate @owned_items %>
+
+          <h3>Items Needed (<%= @needed_items.count %>)</h3>
+          <section>
+            <%= will_paginate @needed_items %>
+            <ul class="lb-album">
+              <%= render @needed_items || 'No items are owned' %>
+            </ul>
+        </section>
+        <%= will_paginate @needed_items %>
+          
+          
+        <% end %>
+
+  </div>
+  
 </div>

@@ -1,13 +1,28 @@
+
 <h1>Item List</h1>
+
+<%= search_form_for @q, url: search_items_path, method: :post do |f| %>
+  <%= f.condition_fields do |c| %>
+    <%= render "condition_fields", f: c %>
+  <% end %>
+  <p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
+  <div class="field">
+    Sort:
+    <%= f.sort_fields do |s| %>
+      <%= s.sort_select %>
+    <% end %>
+  </div>
+  <div class="actions"><%= f.submit "Search" %></div>
+<% end %>
 
 <table class="table table-hover">
   <tr>
     <th>ID</th>
     <th></th>
-    <th>Name</th>
+    <th><%= sort_link @q, :name, "Item Name" %></th>
     <th>Short description</th>
     <th>Upc</th>
-    <th>Make</th>
+    <th><%= sort_link @q, :make_id, "Make" %></th>
     <th>Model name</th>
     <th>List price</th>
     <th>Release date</th>
@@ -29,7 +44,7 @@
         <td><%= item.make.name %></td>
     <% end %>
     <td><%= item.model_name %></td>
-    <td>$<%= item.list_price %></td>
+    <td><%=  number_to_currency item.list_price %></td>
     <td><%= item.release_date %></td>
     <td><%= link_to 'E', edit_item_path(item) %></td>
     <td><%= link_to 'X', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>

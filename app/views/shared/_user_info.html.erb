@@ -1,0 +1,12 @@
+<a href="<%= user_path(current_user) %>">
+  <%= image_tag current_user.photo.url(:small) unless current_user.photo.nil?%>
+</a>
+<h1>
+  <%= current_user.name %>
+</h1>
+<span>
+  <%= link_to "view my profile", current_user %>
+</span>
+<span>
+  <%= pluralize(current_user.user_purchases.count, "purchase") %>
+</span>

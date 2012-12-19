@@ -7,7 +7,7 @@
     <th>Sku</th>
     <th>Price</th>
     <th>Url</th>
-    <th>Store return category</th>
+    <th>Return category</th>
     <th></th>
     <th></th>
     <th></th>
@@ -20,7 +20,7 @@
     <td><%= company_item.sku %></td>
     <td><%= company_item.price %></td>
     <td><%= company_item.url %></td>
-    <td><%= company_item.store_return_category_id %></td>
+    <td><%= company_item.return_category_id %></td>
     <td><%= link_to 'Show', company_item %></td>
     <td><%= link_to 'Edit', edit_company_item_path(company_item) %></td>
     <td><%= link_to 'Destroy', company_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>

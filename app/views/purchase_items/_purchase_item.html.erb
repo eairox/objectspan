@@ -1,0 +1,67 @@
+   
+	<!-- <li>
+		<a href="#image-<%= purchase_item_counter+1 %>">
+			<%= image_tag purchase_item.item.photo.url(:small) %>
+			
+			<span ><%= purchase_item.item.name %>
+					$<%= purchase_item.total %></span>
+		</a>
+		<div style="position:relative; position:center; top:-20px; left:20px;"><%= purchase_item.item.name %> <%= purchase_item.purchase.purchase_date %></div>
+		
+		<div class="lb-overlay" id="image-<%= purchase_item_counter+1 %>">
+			<%= image_tag purchase_item.item.photo.url(:medium) %>
+			<div>
+				<h3> <%= purchase_item.item.name %></h3>
+				<p>Quantity: <%= purchase_item.quantity %></p>
+				<p>Serial # <%= purchase_item.serial_number %></p>
+
+				<a href="#image-<%= purchase_item_counter %>" class="lb-prev">Prev</a>
+				<a href="#image-<%= purchase_item_counter+2 %>" class="lb-next">Next</a>
+			</div>
+			<a href="#page" class="lb-close">x Close</a>
+		</div>
+	</li>
+-->
+
+<table style="padding:10px; margin:5px;background-color:lightyellow">
+	<tr>
+		<td style="padding:10px;vertical-align:top;width:25%">
+			<%= image_tag purchase_item.item.photo.url(:thumb) %>
+			<br/><%= purchase_item.item.name %>
+			<br><%= link_to "Edit", edit_purchase_item_path(purchase_item) %>
+			<%= link_to 'Remove', [purchase_item], :confirm => 'Really remove this item from purchase?', :method => :delete %>
+		</td>
+		<td style="padding:10px;vertical-align:top;">
+			Return By: <%= purchase_item.allowed_return_date.strftime("%b %e, %Y") unless purchase_item.allowed_return_date.nil? %>
+			<br/>Protected through: <%= purchase_item.protection_date.strftime("%b %e, %Y") unless purchase_item.protection_date.nil? %>
+			<% if purchase_item.quantity && purchase_item.quantity > 1 %>
+			    <br/>Quantity: <%= purchase_item.quantity %>
+			<% end %>
+			<% if !purchase_item.serial_number.nil? %>
+			    <br/>Serial Number: <%= purchase_item.serial_number unless purchase_item.serial_number.nil? %>
+			<% end %>
+			<%= raw '<br/>HSA Eligible' if purchase_item.hsa_eligible? %>
+		</td>
+		<td style="padding:10px;vertical-align:top;width:25%">
+			<div style="width:150px;">
+				Price:  <%= number_to_currency purchase_item.price %>
+				<br/>Shipping: <%= number_to_currency purchase_item.shipping %>
+				<br/>Discount: <%= number_to_currency purchase_item.discount %>
+				<br/>Tax: <%= number_to_currency purchase_item.tax %>
+				<br/>Total: <%= number_to_currency purchase_item.total %>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=3 style="vertical-align:bottom;">
+			<br/>Share with Friends <input type=checkbox>
+			<br/>Tags: Electronics
+		</td>
+	</tr>
+</table>
+
+
+
+
+
+

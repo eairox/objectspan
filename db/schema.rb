@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207203307) do
+ActiveRecord::Schema.define(:version => 20121214045107) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -88,9 +88,9 @@ ActiveRecord::Schema.define(:version => 20121207203307) do
     t.string   "sku"
     t.float    "price"
     t.string   "url"
-    t.integer  "store_return_category_id"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.integer  "return_category_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "company_return_policies", :force => true do |t|
@@ -150,10 +150,10 @@ ActiveRecord::Schema.define(:version => 20121207203307) do
     t.text     "features"
     t.integer  "make_id"
     t.string   "model_name"
-    t.float    "list_price"
+    t.decimal  "list_price",         :precision => 8, :scale => 2
     t.date     "release_date"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
@@ -245,20 +245,16 @@ ActiveRecord::Schema.define(:version => 20121207203307) do
     t.integer  "purchase_id"
     t.string   "serial_number"
     t.float    "quantity"
-    t.float    "price"
-    t.integer  "purchase_status_id"
-    t.float    "tax"
-    t.float    "shipping"
-    t.float    "other_cost"
-    t.float    "discount"
-    t.float    "total"
-    t.float    "mail_in_rebate"
-    t.date     "mail_in_rebate_date"
-    t.integer  "mail_in_rebate_status_id"
-    t.date     "return_date"
-    t.integer  "return_store_id"
-    t.string   "return_tracking"
+    t.decimal  "price",                     :precision => 8, :scale => 2
+    t.decimal  "tax",                       :precision => 8, :scale => 2
+    t.decimal  "shipping",                  :precision => 8, :scale => 2
+    t.decimal  "other_cost",                :precision => 8, :scale => 2
+    t.decimal  "discount",                  :precision => 8, :scale => 2
+    t.decimal  "total",                     :precision => 8, :scale => 2
+    t.date     "allowed_return_date"
+    t.date     "protection_date"
     t.integer  "purchase_item_status_id"
+    t.date     "purchase_item_status_date"
     t.integer  "user_id"
     t.boolean  "tax_deductable"
     t.boolean  "hsa_eligible"
@@ -266,8 +262,10 @@ ActiveRecord::Schema.define(:version => 20121207203307) do
     t.integer  "item_feedback_rating_id"
     t.text     "item_feedback"
     t.datetime "feedback_date"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.integer  "visibility_id"
+    t.integer  "store_id"
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
   end
 
   create_table "purchase_statuses", :force => true do |t|
@@ -278,23 +276,32 @@ ActiveRecord::Schema.define(:version => 20121207203307) do
 
   create_table "purchases", :force => true do |t|
     t.string   "name"
-    t.integer  "group_id"
-    t.integer  "company_id"
     t.integer  "store_id"
     t.datetime "purchase_date"
     t.integer  "payment_method_id"
-    t.integer  "visibility_id"
     t.integer  "user_id"
     t.string   "order_number"
     t.integer  "merchant_type_id"
     t.integer  "purchase_feedback_id"
     t.integer  "store_feedback_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.decimal  "subtotal",             :precision => 8, :scale => 2
+    t.decimal  "discount",             :precision => 8, :scale => 2
+    t.decimal  "tax",                  :precision => 8, :scale => 2
+    t.decimal  "shipping",             :precision => 8, :scale => 2
+    t.decimal  "other_charges",        :precision => 8, :scale => 2
+    t.decimal  "total",                :precision => 8, :scale => 2
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
     t.string   "receipt_file_name"
     t.string   "receipt_content_type"
     t.integer  "receipt_file_size"
     t.datetime "receipt_updated_at"
+  end
+
+  create_table "relationship_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "return_categories", :force => true do |t|
@@ -367,6 +374,36 @@ ActiveRecord::Schema.define(:version => 20121207203307) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+  end
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       :limit => 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "user_item_relationships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.integer  "relationship_type_id"
+    t.datetime "relationship_date"
+    t.integer  "rating"
+    t.text     "comments"
+    t.integer  "visibility_id"
+    t.text     "private_comments"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -1,0 +1,40 @@
+
+<table border=1 class="purchase_item_form_table">
+<%= f.inputs do %>
+	<tr>
+		<td >
+			
+        	<%= f.input :item_name, :as => :string, :input_html => {:class => 'itemSelectClass'} %>
+            <%= f.link_to_remove "Remove Item" %>
+		</td>
+		<td >
+
+			<%= f.input :protection_date, :as => :string, :input_html => {:class => "datepickerClass", :size => 15 }   %>
+
+			<%= f.input :allowed_return_date, :as => :string, :label => "Return By", :input_html => {:class => "datepickerClass", :size => 15}   %>
+		
+			<%= f.input :serial_number,:input_html => { :size => 15 }  %>
+
+			<%= f.input :hsa_eligible%>
+			<%= f.input :visibility%>
+			
+		</td>
+		<td>
+			
+				<%= f.input :price, :as => :string,:input_html => { :class => 'rightalign', :size => 15}  %>
+				<%= f.input :shipping, :as => :string,:input_html => { :class => 'rightalign', :size => 15}  %>
+				<%= f.input :discount, :as => :string,:input_html => { :class => 'rightalign', :size => 15}  %>
+				<%= f.input :tax, :as => :string,:input_html => { :class => 'rightalign', :size => 15}  %>
+				<%= f.input :total, :as => :string,:input_html => { :class => 'rightalign', :size => 15}  %>
+
+			
+		</td>
+	</tr>
+	<tr>
+		<td colspan=3 style="vertical-align:bottom;">
+			<br/>Share with Friends <input type=checkbox>
+			<br/>Tags: 
+		</td>
+	</tr>
+	  <% end %>
+</table>

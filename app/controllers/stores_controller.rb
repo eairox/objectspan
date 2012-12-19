@@ -2,11 +2,11 @@ class StoresController < ApplicationController
   # GET /stores
   # GET /stores.json
   def index
-    @stores = Store.all
-
+    @stores = Store.order(:name).where("name like ?", "%#{params[:term]}%")
+    
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @stores }
+      format.json { render json: @stores.map(&:name) }
     end
   end
 

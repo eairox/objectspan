@@ -19,18 +19,17 @@
 
 <div class="span6">
   <b>Store:</b>
-  <%= link_to @purchase_item.store.name, @purchase_item.store %>
+
 </div>
 
 
 <div class="span6">
   <b>Purchase status:</b>
-  <%= @purchase_item.purchase_status_id %>
 </div>
 
 <div class="span6">
-  <b>Purchase:</b>
-  <%= @purchase_item.purchase.name %>
+  <b>Purchase Date:</b>
+  <%= @purchase_item.purchase.purchase_date %>
 </div>
 </div>
 <br>
@@ -49,37 +48,7 @@
   </tr>
   </table>
 
-<h2> Mail-in-Rebate </h2>
-<p>
-  <b>Mail in rebate:</b>
-  <%= @purchase_item.mail_in_rebate %>
-</p>
 
-<p>
-  <b>Mail in rebate date:</b>
-  <%= @purchase_item.mail_in_rebate_date %>
-</p>
-
-<p>
-  <b>Mail in rebate status:</b>
-  <%= @purchase_item.mail_in_rebate_status_id %>
-</p>
-
-<h2>Return</h2>
-<p>
-  <b>Return date:</b>
-  <%= @purchase_item.return_date %>
-</p>
-
-<p>
-  <b>Return store:</b>
-  <%= @purchase_item.return_store_id %>
-</p>
-
-<p>
-  <b>Return tracking:</b>
-  <%= @purchase_item.return_tracking %>
-</p>
 
 <p>
   <b>Purchase item status:</b>

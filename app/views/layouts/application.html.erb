@@ -3,6 +3,8 @@
 <head>
   <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
+  <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <!--[if lt IE 9]>
@@ -10,18 +12,49 @@
   <![endif]-->
   <script>
     $(function() {
-        var groups = <%= raw Group.pluck(:name).as_json %>;
-        $( "#purchase_group_id" ).autocomplete({
-            source: groups
-        });
-        $( "#item_release_date" ).datepicker();
-        $( "#purchase_purchase_date" ).datepicker();
+        
 
+        $( ".datepickerClass" ).datepicker( {dateFormat: "yy/mm/dd"});
+        
+        var companyList = <%= raw Company.pluck(:name).as_json %>;
+        $( ".companySelectClass" ).autocomplete({
+            source: companyList
+        });
+        
+        var itemList = <%= raw Item.pluck(:name).as_json %>;
+        $( ".itemSelectClass" ).autocomplete({
+            source: itemList
+        });
+        
+       $('#purchase_purchase_date').change(function(){
+          var purchase_date = $('#purchase_purchase_date').val();
+          $('')
+
+       });
+
+        $('.companySelectClass').autocomplete({
+          change:function( event, ui ) {
+          var data=$.data(this);//Get plugin data for 'this'
+          if(data.autocomplete.selectedItem==undefined){
+            $( "#purchase_store_name" ).val('');
+
+          }
+          else {
+            alert("selected" + data.autocomplete.selectedItem.value); 
+            var comp = data.autocomplete.selectedItem.value;
+            var storeList = <%= raw Store.pluck(:name).as_json %>;
+            $( ".storeSelectClass" ).autocomplete({
+              source: storeList,
+              
+            });
+          }
+        }
+      });
 
     });
-
-    
     </script>
+
+   
 </head>
 <body>
   <%= render 'layouts/header' %>

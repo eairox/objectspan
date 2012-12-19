@@ -8,7 +8,7 @@ class CreateItems < ActiveRecord::Migration
       t.text :features
       t.integer :make_id
       t.string :model_name
-      t.float :list_price
+      t.decimal :list_price, precision: 8, scale: 2
       t.date :release_date
 
       t.timestamps

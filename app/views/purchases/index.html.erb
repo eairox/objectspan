@@ -1,37 +1,40 @@
 <h1>Purchases</h1>
-
-<table class="table table-hover">
-  <tr>
-    <th>Name</th>
-    <th>Group</th>
-    <th>Store</th>
-    <th>Purchase Date</th>
-    <th>Payment method</th>
-    <th>Visibility</th>
-    <th>User</th>
-    <th>Number of Items</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<table style="border: 1px solid black; width:100%; align:top;font-size:1em; background-color:#efe">
 <% @purchases.each do |purchase| %>
-  <tr>
-    <td><%= purchase.name %></td>
-    <td><%= link_to purchase.group.name, purchase.group %></td>
-    <td><%= link_to purchase.store.name, purchase.store %></td>
-    <td><%= purchase.purchase_date %></td>
-    <td><%= purchase.payment_method.name %></td>
-    <td><%= purchase.visibility.name unless purchase.visibility_id.nil? %></td>
-    <td><%= image_tag purchase.user.photo.url(:thumb) %><%= purchase.user.name unless purchase.user_id.nil? %></td>
-    <td><%= purchase.purchase_items.count %></td>
-    <td><%= link_to 'Show', purchase %></td>
-    <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
-    <td><%= link_to 'Destroy', purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+
+<tr style="border: 1px solid black;">
+    <td style="width:20%;padding:5px;vertical-align:top;">
+        <div class="store" >
+            <%= image_tag purchase.store.photo.url(:thumb) unless purchase.store.photo.nil? %>
+             <div class="address"><%= link_to purchase.store.name, purchase.store %>
+           <br/><%= purchase.store.address1 %>
+            <br/><%= purchase.store.city %>, <%= purchase.store.state.state_code unless purchase.store.state.nil?  %> <%= purchase.store.zipcode %> 
+            <%= purchase.store.country.name unless purchase.store.country.nil? %></div>
+            <div class="phone">Phone: <%= purchase.store.phone %><%= purchase.store.store_url %></div>
+        </div>
+    </td>
+    <td>
+        <%= render purchase.purchase_items %>
+    </td>
+    
+    <td style="width:25%; padding:5px;vertical-align:top;">
+    <div class="purchase">
+                Purchase Date: <%= purchase.purchase_date.strftime("%m/%d/%Y") unless purchase.purchase_date.nil? %>
+                <br/>Order/Receipt # <%= purchase.order_number %>
+                <br/>Rating:
+                <br/><%= link_to "Edit Purchase", edit_purchase_path(purchase) %>
+            </div>  
+    </td>
+
+</tr>
+    
 <% end %>
 </table>
 
-<br />
 
 <%= link_to 'New Purchase', new_purchase_path %>
+
+
+
+
+

@@ -1,8 +1,14 @@
+
+
 class PurchasesController < ApplicationController
+
+
+  before_filter :signed_in_user
+
   # GET /purchases
   # GET /purchases.json
   def index
-    @purchases = Purchase.all
+    @purchases = current_user.purchases
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,6 +31,7 @@ class PurchasesController < ApplicationController
   # GET /purchases/new.json
   def new
     @purchase = Purchase.new
+    3.times { @purchase.purchase_items.build }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,11 +47,11 @@ class PurchasesController < ApplicationController
   # POST /purchases
   # POST /purchases.json
   def create
-    @purchase = Purchase.new(params[:purchase])
+    @purchase = current_user.purchases.build(params[:purchase])
 
     respond_to do |format|
       if @purchase.save
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+        format.html { redirect_to root_url, notice: 'Purchase was successfully created.' }
         format.json { render json: @purchase, status: :created, location: @purchase }
       else
         format.html { render action: "new" }
@@ -80,4 +87,12 @@ class PurchasesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  
+
+  def mygmail
+    gmail = Gmail.connect("eairox@gmail.com", "Aarjoo79!")
+    gmail.inbox
+  end
+
 end

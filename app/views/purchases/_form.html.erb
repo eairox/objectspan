@@ -1,111 +1,57 @@
-<%= form_for(@purchase) do |f| %>
-  <% if @purchase.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
+<%= semantic_nested_form_for(@purchase) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
 
-      <ul>
-      <% @purchase.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="purchase_form_list">
+<table style="border: 1px solid black; width:100%; align:top;font-size:1em;">
 
+<tr style="border: 1px solid black;">
+    <td style="width:20%;padding:5px;vertical-align:top;">
+        <table border=1 style="width:100%;padding:5px;border: 1px solid black;">
+          
+      
 
-<div class="row">
-
-  <div class="span2">
-    <%= f.label :purchase_date %>
-  </div>
-
-  <div class="span4">
-    <%= f.text_field :purchase_date, :class => 'datepicker' %>
-  </div>
-
-<!--
-  <div class="span2">
-    <%= f.label :name %>
-  </div>
-
-  <div class="span4">
-    <%= f.text_field :name %>
-  </div>
--->
-
-  <div class="span2">
-    <%= f.label :group_id %>
-  </div>
-
-  <div class="span4">
-    <div class="ui-widget">
-      <%= f.text_field :group_id,  :class => "purchase_groups" %>
-    </div>
-    <%= f.select(:group_id, Group.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>
-  </div>
-
-
-<!--
--->
-
-  <!-- Show only if selected company has stores  -->
-
-  <div class="span2">
-    <%= f.label :store_id %>
-  </div>
-
-  <div class="span4">
-    <%= f.select(:store_id, Store.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>  
-  </div>
-
-
-  <div class="span2">
-    <%= f.label :payment_method_id %>
-  </div>
-
-  <div class="span4">
-    <%= f.select(:payment_method_id, PaymentMethod.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>  
-  </div>
-
-  <div class="span2">
-    <%= f.label :visibility_id %>
-  </div>
-
-  <div class="span4">
-    <%= f.select(:visibility_id, Visibility.all.collect{ |g| [g.name, g.id]},  :include_blank => true) %>  
-  </div>
-</div>
-
-<h2> Items </h2>
-
-<table class="table">
-  <tr>
-    <th>Item</th>
-    <th>Quantity</th>
-    <th>Price</th>
+          <%= f.inputs do %>
+            <div class="purchase">
+                <tr style="padding:5px">
+                  <td style="width:5px;padding:5px"><%= f.input :purchase_date, :as => :string, :input_html => {:class => "datepickerClass", :size => 15 ,:value => 
+@purchase.purchase_date ? @purchase.purchase_date.strftime("%m/%d/%Y"):""}  %></td>
+                  <td style="width:5px;padding:5px"><%= f.input :payment_method %></td>
+                  
+                </tr><tr>
+                  <td style="width:5px;padding:5px">
+                    <!-- <%= f.input :seller_name,  :as => :string, :input_html => {:class =>"companySelectClass", :value => @purchase.store.company.name} %> -->
+                    <li>
+                    <label class=" label">Seller:</label>
+                    <input class="companySelectClass" value = <%= @purchase.store.company.name %> size="5" style="width:72%">
+                    </li>
+          
+                  <%= f.input :store_name, :as => :string, :input_html => {:class =>"storeSelectClass",:value => @purchase.store.name} %></td>
+                  <td style="width:5px;padding:5px"><%= f.input :order_number,:input_html => { :size => 15 } %></td>
+                </tr>
+              </table>
+            </div>  
+          <% end %>
+        </div>
+    </td>
+ 
   </tr>
-  <% @purchase.purchase_items.each do |item| %>
-    <tr>
-      <td><%= item.item.name %></td>
-      <td><%= item.quantity %></td>
-      <td><%= item.total %></td>
+  <tr>
+    <td>
+      <%= f.fields_for :purchase_items %>
+        <p><%= f.link_to_add "Add a new Item", :purchase_items %></p>
+    </td>
+    
+    
 
-    </tr>
-
-  <% end %>
+</tr>
 </table>
-
-<h2> Attachments </h2>
-<div>
-  Receipt: <%= f.file_field :receipt %>
-
 </div>
 
-
-<!-- Items -->
-
-
-
+<br/>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.actions do %>
+      <%= f.action :submit, :as => :button %>
+      <%= f.action :cancel, :as => :link %>
+    <% end %>
   </div>
 <% end %>

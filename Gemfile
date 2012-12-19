@@ -6,6 +6,14 @@ gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
+gem "omniauth-twitter"
+gem 'ransack'
+gem 'fancybox2-rails', '~> 0.2.1'
+gem 'acts-as-taggable-on', '~> 2.3.1'
+gem 'thin'
+gem "nested_form"
+gem 'formtastic'
+
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
@@ -13,6 +21,7 @@ group :development, :test do
   gem 'guard-rspec', '1.2.1'
   gem 'guard-spork', '1.2.0'
   gem 'spork', '0.9.2'
+
 end
 
 group :development do
@@ -30,7 +39,7 @@ end
 gem 'jquery-rails', '2.0.2'
 gem 'jquery-ui-rails'
 gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git"
-gem 'carmen-rails'
+
 
 group :test do
   gem 'capybara', '1.1.2'

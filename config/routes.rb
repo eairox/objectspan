@@ -1,5 +1,11 @@
 Objectspan::Application.routes.draw do
   
+  resources :relationship_types
+
+
+  resources :user_item_relationships
+
+
   resources :company_categorizations
 
 
@@ -48,13 +54,12 @@ Objectspan::Application.routes.draw do
   resources :payment_methods
 
 
-  resources :purchase_items
-
-
   resources :duration_frequencies
 
 
-  resources :purchases
+  resources :purchases 
+    resources :purchase_items
+  
 
 
   resources :return_categories
@@ -84,12 +89,18 @@ Objectspan::Application.routes.draw do
   resources :store_types
 
 
-  resources :items
+  resources :items do
+    collection { post :search, to: 'items#index' }
+  end
 
 
   resources :makes
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+
+  get 'tags/:tag', to: 'items#index', as: :tag
+
+  match '/auth/:provider/callback', to: 'sessions#create'
 
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'

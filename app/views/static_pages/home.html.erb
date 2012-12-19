@@ -1,5 +1,33 @@
-<div class="center hero-unit">
-	<h1>Object Span</h1>
-	<p>Welcome to Object Span!</p>
-	<%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
-</div>
+<% if signed_in? %>
+  <div class="row">
+    <aside class="span4">
+      <section>
+        <%= render 'shared/user_info' %>
+      </section>
+      <section>
+        
+      </section>
+    </aside>
+
+    <div class="span8">
+
+      <h3>Purchases</h3>
+      	<ul class="lb-album">
+	    	<%= render 'shared/purchases' %>
+
+	    </ul>
+	  
+    </div>
+  </div>  
+<% else %>
+  <div class="center hero-unit">
+    <h1>Object Span</h1>
+
+    <p>Welcome to Object Span!</p>
+
+    <%= link_to "Sign up now!", signup_path, 
+                                class: "btn btn-large btn-primary" %>
+  </div>
+
+  <%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
+<% end %> 

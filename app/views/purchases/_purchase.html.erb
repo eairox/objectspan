@@ -1,0 +1,9 @@
+<li>
+
+  <span class="timestamp"><%= purchase.purchase_date %></span>
+  <span class="store"><%= purchase.store_id %></span>
+  
+  <span class="timestamp">
+    Created <%= time_ago_in_words(purchase.created_at) %> ago.
+  </span>
+</li>

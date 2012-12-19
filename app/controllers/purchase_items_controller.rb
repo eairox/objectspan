@@ -1,4 +1,7 @@
 class PurchaseItemsController < ApplicationController
+
+ 
+
   # GET /purchase_items
   # GET /purchase_items.json
   def index
@@ -13,7 +16,8 @@ class PurchaseItemsController < ApplicationController
   # GET /purchase_items/1
   # GET /purchase_items/1.json
   def show
-    @purchase_item = PurchaseItem.find(params[:id])
+    @purchase = Purchase.find(params[:purchase_id])
+    @purchase_item = @purchase.purchase_items.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,15 +44,16 @@ class PurchaseItemsController < ApplicationController
   # POST /purchase_items
   # POST /purchase_items.json
   def create
-    @purchase_item = PurchaseItem.new(params[:purchase_item])
+    @purchase_item = PurchaseItem.find(params[:id])
+   
 
     respond_to do |format|
       if @purchase_item.save
-        format.html { redirect_to @purchase_item, notice: 'Purchase item was successfully created.' }
-        format.json { render json: @purchase_item, status: :created, location: @purchase_item }
+        format.html { redirect_to purchase_path(@purchase), notice: 'Purchase item was successfully created.' }
+        format.json { render json: @purchase, status: :created, location: @purchase }
       else
         format.html { render action: "new" }
-        format.json { render json: @purchase_item.errors, status: :unprocessable_entity }
+        format.json { render json: @purchase.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -72,12 +77,16 @@ class PurchaseItemsController < ApplicationController
   # DELETE /purchase_items/1
   # DELETE /purchase_items/1.json
   def destroy
-    @purchase_item = PurchaseItem.find(params[:id])
+    @purchase = Purchase.find(params[:purchase_id])
+    @purchase_item = @purchase.purchase_items.find(params[:id])
     @purchase_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to purchase_items_url }
+      format.html { redirect_to purchase_path(@purchase) }
       format.json { head :no_content }
     end
   end
+
+ 
+
 end

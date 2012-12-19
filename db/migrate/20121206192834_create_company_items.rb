@@ -6,7 +6,7 @@ class CreateCompanyItems < ActiveRecord::Migration
       t.string :sku
       t.float :price
       t.string :url
-      t.integer :store_return_category_id
+      t.integer :return_category_id
 
       t.timestamps
     end

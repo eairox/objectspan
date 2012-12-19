@@ -25,7 +25,7 @@
     <td><%= store.company.name %></td>
     <td><%= store.city %></td>
     <td><%= store.state.name unless store.state_id.nil?%></td>
-    <td><%= store.country.name %></td>
+    <td><%= store.country.name unless store.country.nil?%></td>
     <td><%= store.phone %></td>
     <td><%= store.store_url %></td>
     <td><%= store.rating %></td>

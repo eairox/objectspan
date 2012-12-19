@@ -5,27 +5,25 @@ class CreatePurchaseItems < ActiveRecord::Migration
       t.integer :purchase_id
       t.string :serial_number
       t.float :quantity
-      t.float :price
-      t.integer :purchase_status_id
-      t.float :tax
-      t.float :shipping
-      t.float :other_cost
-      t.float :discount
-      t.float :total
-      t.float :mail_in_rebate
-      t.date :mail_in_rebate_date
-      t.integer :mail_in_rebate_status_id
-      t.date :return_date
-      t.integer :return_store_id
-      t.string :return_tracking
+      t.decimal :price, precision: 8, scale: 2
+      t.decimal :tax, precision: 8, scale: 2
+      t.decimal :shipping, precision: 8, scale: 2
+      t.decimal :other_cost, precision: 8, scale: 2
+      t.decimal :discount, precision: 8, scale: 2
+      t.decimal :total, precision: 8, scale: 2
+      t.date :allowed_return_date
+      t.date :protection_date
       t.integer :purchase_item_status_id
-      t.integer :user_id
+      t.date :purchase_item_status_date
+      t.references :user
       t.boolean :tax_deductable
       t.boolean :hsa_eligible
       t.text :notes
       t.integer :item_feedback_rating_id
       t.text :item_feedback
       t.datetime :feedback_date
+      t.integer :visibility_id
+      t.references :store
 
       t.timestamps
     end

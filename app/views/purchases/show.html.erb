@@ -1,60 +1,30 @@
+<h1>Purchase</h1>
 
-  <h1>Purchase: <%= image_tag @purchase.store.company.logo.url(:thumb) unless @purchase.store.company.logo.blank? %> <%= @purchase.name %></h1>
+<table style="border: 1px solid black; width:100%; align:top;font-size:1em;; background-color:#efe"">
 
-<div class="row">
-<div class="span6">
-  <b>Purchase Group:</b>
-  <%= link_to @purchase.group.name, @purchase.group %>
-</div>
+<tr style="border: 1px solid black;">
+    <td style="width:20%;padding:5px;vertical-align:top;">
+        <div class="store" >
+            <%= image_tag @purchase.store.photo ? @purchase.store.photo.url(:thumb) : ""  %>
+             <div class="address"><%= link_to @purchase.store.name, @purchase.store %>
+           <br/><%= @purchase.store.address1 %>
+            <br/><%= @purchase.store.city %>, <%= @purchase.store.state && @purchase.store.state.state_code %> <%= @purchase.store.zipcode %> 
+            <%= @purchase.store.country && @purchase.store.country.name %></div>
+            <div class="phone">Phone: <%= @purchase.store.phone %><%= @purchase.store.store_url %></div>
+        </div>
+    </td>
+    <td>
+        <%= render @purchase.purchase_items %>
+    </td>
+    
+    <td style="width:25%; padding:5px;vertical-align:top;">
+    <div class="purchase">
+                Purchase Date: <%= @purchase.purchase_date && @purchase.purchase_date.strftime("%m/%d/%Y")  %>
+                <br/>Order/Receipt # <%= @purchase.order_number %>
+                <br/>Rating:
+                <br/><%= link_to "Edit Purchase", edit_purchase_path(@purchase) %>
+            </div>  
+    </td>
 
-<div class="span6">
-  <b>Store:</b>
-  <%= link_to @purchase.store.name, @purchase.store %>
-</div>
-
-<div class="span6">
-  <b>Purchase date:</b>
-  <%= @purchase.purchase_date %>
-</div>
-
-<div class="span6">
-  <b>Payment method:</b>
-  <%= image_tag @purchase.payment_method.photo.url(:thumb) unless @purchase.payment_method.photo.blank? %><%= @purchase.payment_method.name %>
-</div>
-
-<div class="span6">
-  <b>Visibility:</b>
-  <%= @purchase.visibility.name %>
-</div>
-
-<div class="span6">
-  <b>User:</b>
-  <%= @purchase.user.name %>
-</div>
-</div>
-<br>
-<p>
-  <%= link_to 'New Purchase item', new_purchase_item_path %>
-</p>
-
-<table class="table table-hover">
-  <tr>
-    <th></th>
-
-    <th>Item</th>
-    <th>Quantity</th>
-    <th>Total Price</th>
-  </tr>
-  <% @purchase.purchase_items.each_with_index do |p, i| %>
-    <tr>
-      <td><%= i+1 %> </td>
-
-      <td><%= image_tag p.item.photo.url(:thumb) unless image_tag p.item.photo.nil? %><%= link_to p.item.name, p %></td>
-      <td><%= p.quantity %> </td>
-      <td>$<%= p.total %> </td>
-    </tr>
-  <% end %>
+</tr>
 </table>
-
-<%= link_to 'Edit', edit_purchase_path(@purchase) %> |
-<%= link_to 'Back', purchases_path %>

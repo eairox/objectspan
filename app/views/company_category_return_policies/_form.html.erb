@@ -1,65 +1,6 @@
-<%= form_for(@company_category_return_policy) do |f| %>
-  <% if @company_category_return_policy.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@company_category_return_policy.errors.count, "error") %> prohibited this company_category_return_policy from being saved:</h2>
 
-      <ul>
-      <% @company_category_return_policy.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= semantic_form_for(@company_category_return_policy) do |f| %>
 
-  <div class="field">
-    <%= f.label :company_id %><br />
-        <%= f.select( :company_id, Company.all.collect {|m| [m.name, m.id]},  :include_blank => true) %>
-  </div>
-  <div class="field">
-    <%= f.label :return_category_id %><br />
-    <%= f.select( :return_category_id, ReturnCategory.all.collect {|m| [m.name, m.id]},  :include_blank => true) %>
-
-  </div>
-  <div class="field">
-    <%= f.label :restocking_fee_precentage %><br />
-    <%= f.text_field :restocking_fee_precentage %>
-  </div>
-  <div class="field">
-    <%= f.label :holiday_purchase_date_from %><br />
-    <%= f.date_select :holiday_purchase_date_from %>
-  </div>
-  <div class="field">
-    <%= f.label :holiday_purchase_date_to %><br />
-    <%= f.date_select :holiday_purchase_date_to %>
-  </div>
-  <div class="field">
-    <%= f.label :holiday_return_date %><br />
-    <%= f.date_select :holiday_return_date %>
-  </div>
-  <div class="field">
-    <%= f.label :return_duration %><br />
-    <%= f.number_field :return_duration %>
-    <%= f.select( :return_duration_type_id, ReturnDurationType.all.collect {|m| [m.name, m.id]},  :include_blank => true) %>
-  </div>
-  <div class="field">
-    <%= f.label :exchange_duration %><br />
-    <%= f.number_field :exchange_duration %>
-    <%= f.select( :exchange_duration_type_id, ExchangeDurationType.all.collect {|m| [m.name, m.id]},  :include_blank => true) %>
-  </div>
- 
-  <div class="field">
-    <%= f.label :rma_required %><br />
-    <%= f.check_box :rma_required %>
-  </div>
-  <div class="field">
-    <%= f.label :open_used_returnable %><br />
-    <%= f.check_box :open_used_returnable %>
-  </div>
-  <div class="field">
-    <%= f.label :restrictions %><br />
-    <%= f.text_area :restrictions %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.inputs %>
+  <%= f.actions %>
 <% end %>

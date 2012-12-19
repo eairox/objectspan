@@ -1,21 +1,5 @@
-<%= form_for(@return_category) do |f| %>
-  <% if @return_category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@return_category.errors.count, "error") %> prohibited this return_category from being saved:</h2>
+<%= semantic_form_for(@return_category) do |f| %>
 
-      <ul>
-      <% @return_category.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.inputs %>
+  <%= f.actions %>
 <% end %>

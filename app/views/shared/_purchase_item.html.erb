@@ -1,0 +1,25 @@
+<li>
+		<div class="blockItem" href="#image-<%= purchase_item_counter+1 %>">
+			<%= image_tag purchase_item.item.photo.url(:small) unless purchase_item.item.photo.nil?%>
+			
+			<span ><%= purchase_item.item.name %>
+					$<%= purchase_item.total %></span>
+		</a>
+		<div style="position:relative; position:center; top:-20px; left:20px;"><%= purchase_item.item.name %> </div>
+		
+
+
+		<div class="lb-overlay" id="image-<%= purchase_item_counter+1 %>">
+			<%= image_tag purchase_item.item.photo.url(:medium) %>
+			<div>
+				<h3> <%= purchase_item.item.name %></h3>
+				<p>Quantity: <%= purchase_item.quantity %></p>
+				<p>Serial # <%= purchase_item.serial_number %></p>
+
+
+				<a href="#image-<%= purchase_item_counter %>" class="lb-prev">Prev</a>
+				<a href="#image-<%= purchase_item_counter+2 %>" class="lb-next">Next</a>
+			</div>
+			<a href="#page" class="lb-close">x Close</a>
+		</div>
+	</li>
