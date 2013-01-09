@@ -15,11 +15,8 @@ class PurchaseItem < ActiveRecord::Base
   	attr_accessible :item_id,  :price, 
   	:purchase_id, :purchase_item_status_id, :purchase_status_id, :quantity,  
   	 :serial_number, :shipping, :store_id, :tax, :total, :tax_deductable, :hsa_eligible, :visibility_id, :allowed_return_date,
-  	 :protection_date, :tag_list, :discount
+  	 :protection_date, :tag_list, :discount, :item_name
 
-
-
-  
 
   	def create_purchase_product
   		if visibility_id == 1 
@@ -29,11 +26,19 @@ class PurchaseItem < ActiveRecord::Base
   	end
 
   	def item_name
-		item.try(:name)
+      logger.debug "XXXXXXXX Displaying Item Name: " 
+      item.try(:name)
   	end
 
-	def item_name=(name)
+    def item_name=(name)
+      logger.debug "XXXXXXXX Updating Item Name: " + name
   		self.item = Item.find_or_create_by_name(name) if name.present?
+      self.item.company_items.create(company_id: purchase.store.company_id)
+      logger.debug "XXXXXXXX Purchase Item attributes hash: #{self.item.inspect}"
   	end
+
+    def calculate_return_duration
+      self.item && self.item.company_items.first.company_category_return_policy && self.item.company_items.where(company_id:purchase.store.company_id).first.company_category_return_policy.return_duration 
+    end
 
 end

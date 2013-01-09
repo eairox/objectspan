@@ -2,12 +2,12 @@
 
 <p>
   <b>Company:</b>
-  <%= @company_item.company_id %>
+  <%= @company_item.company.name %>
 </p>
 
 <p>
   <b>Item:</b>
-  <%= @company_item.item_id %>
+  <%= @company_item.item.name %>
 </p>
 
 <p>
@@ -27,7 +27,7 @@
 
 <p>
   <b>Return category:</b>
-  <%= @company_item.return_category_id %>
+  <%= @company_item.company_category_return_policy.return_category.name %>
 </p>
 
 

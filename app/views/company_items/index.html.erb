@@ -15,12 +15,12 @@
 
 <% @company_items.each do |company_item| %>
   <tr>
-    <td><%= company_item.company_id %></td>
-    <td><%= company_item.item_id %></td>
+    <td><%= link_to company_item.company.name, company_item.company %></td>
+    <td><%= link_to company_item.item.name, company_item.item %></td>
     <td><%= company_item.sku %></td>
     <td><%= company_item.price %></td>
     <td><%= company_item.url %></td>
-    <td><%= company_item.return_category_id %></td>
+    <td><%= link_to company_item.company_category_return_policy.return_category.name , company_item.company_category_return_policy%></td>
     <td><%= link_to 'Show', company_item %></td>
     <td><%= link_to 'Edit', edit_company_item_path(company_item) %></td>
     <td><%= link_to 'Destroy', company_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>

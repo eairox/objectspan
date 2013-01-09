@@ -88,9 +88,9 @@ ActiveRecord::Schema.define(:version => 20121214045107) do
     t.string   "sku"
     t.float    "price"
     t.string   "url"
-    t.integer  "return_category_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.integer  "company_category_return_policy_id"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "company_return_policies", :force => true do |t|

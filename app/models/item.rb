@@ -10,6 +10,7 @@ class Item < ActiveRecord::Base
 	has_many :users, :through => :user_item_relationships, :dependent => :destroy
 	has_many :user_item_relationships
 
+
 	
 	has_attached_file :photo, :styles => { :small => "150>x140", :medium => "300x300>", :thumb => "50x50>" },
 							  :url  => "/assets/items/:id/photo/:style/:basename.:extension",

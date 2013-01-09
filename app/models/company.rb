@@ -25,8 +25,11 @@ class Company < ActiveRecord::Base
 
 	accepts_nested_attributes_for :stores, :company_categorizations, :company_category_return_policies, :allow_destroy => true
 
-  	attr_accessible :logo, :address1, :address2, :city, :country_id, :description, :email, :fax, :name, :other_state, :phone, :state_id, :url, :zipcode
+  	attr_accessible :logo, :address1, :address2, :city, :country_id, :description, :email, :fax, 
+  	:name, :other_state, :phone, :state_id, :url, :zipcode
 
   	validates :name, :presence => true, uniqueness: { case_sensitive: false }
+
+	default_scope order: :name
 
 end

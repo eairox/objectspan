@@ -8,7 +8,7 @@
             <%= f.link_to_remove "Remove Item" %>
 		</td>
 		<td >
-
+			<%= f.input :calculate_return_duration %>
 			<%= f.input :protection_date, :as => :string, :input_html => {:class => "datepickerClass", :size => 15 }   %>
 
 			<%= f.input :allowed_return_date, :as => :string, :label => "Return By", :input_html => {:class => "datepickerClass", :size => 15}   %>

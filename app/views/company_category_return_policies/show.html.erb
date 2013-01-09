@@ -32,13 +32,13 @@
 
 <p>
   <b>Return duration:</b>
-  <%= @company_category_return_policy.return_duration %> <%= @company_category_return_policy.return_duration_type.name %>
+  <%= @company_category_return_policy.return_duration_type && pluralize(@company_category_return_policy.return_duration, @company_category_return_policy.return_duration_type.name) %>
 
 </p>
 
 <p>
   <b>Exchange duration:</b>
-  <%= @company_category_return_policy.exchange_duration %>   <%= @company_category_return_policy.exchange_duration_type.name %>
+  <%=@company_category_return_policy.exchange_duration_type && pluralize(@company_category_return_policy.exchange_duration, @company_category_return_policy.exchange_duration_type.name) %>
 
 </p>
 

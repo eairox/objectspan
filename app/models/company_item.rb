@@ -2,8 +2,8 @@ class CompanyItem < ActiveRecord::Base
 
 belongs_to :company
 belongs_to :item
-belongs_to :store_return_category
+belongs_to :company_category_return_policy
 
 
-  attr_accessible :company_id, :item_id, :price, :sku, :store_return_category_id, :url
+  attr_accessible :company_id, :item_id, :price, :sku, :company_category_return_policy_id, :url
 end

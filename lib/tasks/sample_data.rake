@@ -191,6 +191,17 @@ namespace :db do
                     ")
 
 
+
+
+    CompanyCategoryReturnPolicy.create!(return_category_id: 1, company_id: 1)
+    CompanyCategoryReturnPolicy.create!(return_category_id: 2, company_id: 1)
+    CompanyCategoryReturnPolicy.create!(return_category_id: 3, company_id: 1)
+    CompanyCategoryReturnPolicy.create!(return_category_id: 5, company_id: 1)
+    
+    
+    
+
+
     puts "Creating Purchases..."
 
     p1= User.find(1).purchases.create!(
